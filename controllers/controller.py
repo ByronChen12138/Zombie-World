@@ -1,5 +1,5 @@
 from utils.cmu_112_graphics import *
-from models.app import *
+from utils.utils import *
 
 
 def mousePressed(app, event):
@@ -19,7 +19,21 @@ def keyPressed(app, event):
     :param event: Current event object
     :return: None
     """
-    pass
+    if event.key == "Up":
+        app.player.direction = DIRECTIONS["Up"]
+        app.player.move()
+
+    elif event.key == "Down":
+        app.player.direction = DIRECTIONS["Down"]
+        app.player.move()
+
+    elif event.key == "Left":
+        app.player.direction = DIRECTIONS["Left"]
+        app.player.move()
+
+    elif event.key == "Right":
+        app.player.direction = DIRECTIONS["Right"]
+        app.player.move()
 
 
 def timerFired(app):

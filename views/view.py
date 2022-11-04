@@ -1,4 +1,6 @@
 from utils.cmu_112_graphics import *
+from utils.utils import *
+
 from models.app import *
 from controllers.controller import *
 
@@ -10,15 +12,32 @@ def redrawAll(app, canvas):
     :param canvas: Current canvas object
     :return: None
     """
-    canvas.create_text(app.width / 2, app.height / 2,
-                       text='Draw your Freddy Fractal here!',
-                       font='Arial 24 bold')
+    # Variables needed to be updated
+    map_size = min(app.width, app.height) - 100
+    map_start_x = (app.width - map_size) / 2
+    map_start_y = app.height - map_size - 10
+    cell_size = map_size / app.map_blocks
 
+    # Draw Map
+    canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size, fill='#C9A946')
 
+    # Draw Zombies
+    for z in app.zombies:
+        z.drawObject(canvas, map_start_x, map_start_y, cell_size)
+
+    # Draw Player
+    app.player.drawObject(canvas, map_start_x, map_start_y, cell_size)
+
+    # Draw Background
+    canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
+    canvas.create_rectangle(0, map_start_y + map_size, app.width, app.height, fill='#E2D9B8', outline='black')
+
+    canvas.create_rectangle(0, 0, map_start_x, app.height, fill='#969285', outline='black')
+    canvas.create_rectangle(map_start_x + map_size, 0, app.width, app.height, fill='#969285', outline='black')
 def runZombieWorldViewer():
     """
     Run the app
     :return: None
     """
     print('Running Zombie World Viewer!')
-    runApp(width=600, height=600)
+    runApp(width=1200, height=800)

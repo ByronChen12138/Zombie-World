@@ -1,4 +1,6 @@
-from utils.cmu_112_graphics import *
+from models.Player import Player
+from models.Zombie import Zombie
+from utils.utils import *
 
 
 def appStarted(app):
@@ -7,4 +9,11 @@ def appStarted(app):
     :param app: Current app object
     :return: None
     """
-    pass
+    # app.timerDelay = 1
+    app.map_blocks = MAP_BLOCKS
+    app.player = Player()
+    app.zombies = set()
+    for i in range(ZOMBIE_NUM):
+        x, y, direction, z_type = roll_a_zombie(app)
+        app.zombies.add(Zombie(x, y, direction, z_type))
+
