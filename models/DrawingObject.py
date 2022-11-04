@@ -18,7 +18,7 @@ class DrawingObject:
 
     def drawObject(self, canvas, start_canvas_x, start_canvas_y, cell_size):
         size = self.size * cell_size
-
+        # TODO: Something is going wrong with this calculation
         if self.shape == "Circle":
             left_x = start_canvas_x + cell_size * (self.x - self.size + 1)
             up_y = start_canvas_y + cell_size * (99 - self.y + self.size - 1)

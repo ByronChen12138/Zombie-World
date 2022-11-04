@@ -2,8 +2,9 @@ import random
 
 from database import *
 
+
 def getDistance(x1, y1, x2, y2):
-    return ((x1 - x2)**2 + (y1 - y2)**2)**0.5
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
 
 
 def isPositionLegal(x, y):
@@ -13,6 +14,7 @@ def isPositionLegal(x, y):
     :param y: y relative position
     :return: True if legal, False if illegal
     """
+    # TODO: Judge it with canves xy, input app
     if 0 <= x < MAP_BLOCKS and 0 <= y < MAP_BLOCKS:
         return True
     return False
@@ -34,7 +36,6 @@ def roll_a_zombie(app):
 
     num = random.randint(1, 10000)
     z_type = Z_TYPE_LIST[-1]
-    print(num)
     for z in Z_TYPE_LIST:
         num -= Z_TYPE[z][-1] * 100
         if num <= 0:
