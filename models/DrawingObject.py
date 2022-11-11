@@ -27,3 +27,10 @@ class DrawingObject:
             drawing_size /= 2
             canvas.create_oval(cx - drawing_size, cy - drawing_size, cx + drawing_size,
                                cy + drawing_size, fill=self.color, outline='black')
+
+            if self.color == "black":
+                dx, dy = self.getDirection()
+                dx *= 2
+                dy *= 2
+                canvas.create_line(cx - dx * drawing_size, cy - dy * drawing_size,
+                                   cx, cy, fill='black', width=3)

@@ -6,15 +6,15 @@ ZOMBIE_LEGAL_DIS = 25
 
 DIRECTIONS = {"Up": (0, 1),
               "Down": (0, -1),
-              "Left": (-1, 0),
-              "Right": (1, 0)}
+              "Left": (1, 0),
+              "Right": (-1, 0)}
 DIRECTIONS_LIST = ["Up", "Down", "Left", "Right"]
 
-# Size, HP, Speed, Color, Damage, Heat Rate, Appear Rate
+# Size, HP, Speed, Color, Damage, Heat Rate, Appear Rate, Score
 Z_TYPE = {
-    "Normal": [3, 100, 1, "#00DE72", 5, 1, 80],
-    "Speed": [2, 30, 3, "#008CE1", 3, 3, 10],
-    "Tank": [6, 300, 0.2, "red", 20, 0.2, 10]}
+    "Normal": [3, 100, 1, "#00DE72", 5, 1, 80, 5],
+    "Speed": [2, 30, 3, "#008CE1", 3, 3, 10, 10],
+    "Tank": [6, 300, 0.2, "red", 20, 0.2, 10, 20]}
 Z_TYPE_LIST = ["Normal", "Speed", "Tank"]
 
 # Size, Ammo, Heat Rate, Color, Damage, Appear Rate

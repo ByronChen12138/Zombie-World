@@ -42,4 +42,13 @@ def timerFired(app):
     :param app: Current app object
     :return: None
     """
-    pass
+    # 10 unit time of invincible time once the player is attacked
+    if app.player.invincible_time <= 0:
+        if doAttacksToPlayer(app):
+            app.player.invincible_time = 10
+    else:
+        app.player.invincible_time -= 1
+
+    # Check if player is died
+    if app.player.isDied():
+        app.is_game_over = True

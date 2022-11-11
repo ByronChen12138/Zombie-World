@@ -57,8 +57,50 @@ def roll_a_zombie(app):
     num = random.randint(1, 10000)
     z_type = Z_TYPE_LIST[-1]
     for z in Z_TYPE_LIST:
-        num -= Z_TYPE[z][-1] * 100
+        # TODO: Possible Error if Z_TYPE changed
+        num -= Z_TYPE[z][-2] * 100
         if num <= 0:
             z_type = z
             break
     return x, y, direction, z_type
+
+
+def isCircleTouch(app, cell_size, obj1, obj2):
+    """
+    Check if two circle is in touch in the canvas
+    :param app: Current app object
+    :param cell_size: The cell size of the map
+    :param obj1: the first obj to check
+    :param obj2: the second obj to check
+    :return: True if in touch; otherwise, False
+    """
+    threshold = (obj1.size + obj2.size) * cell_size / 2
+
+    x, y = obj1.getPosition()
+    cx1, cy1 = getCXY(app, x, y)
+
+    x, y = obj2.getPosition()
+    cx2, cy2 = getCXY(app, x, y)
+
+    if getDistance(cx1, cy1, cx2, cy2) <= threshold:
+        return True
+    return False
+
+
+def doAttacksToPlayer(app):
+    """
+    Do possible attack to player
+    :param app: Current app object
+    :return: If any attack, return True; else False
+    """
+    map_size = min(app.width, app.height) - 100
+    cell_size = map_size / app.map_blocks
+    is_attacked = False
+
+    for zombie in app.zombies:
+        if isCircleTouch(app, cell_size, zombie, app.player):
+            zombie.attack(app.player)
+            is_attacked = True
+
+    return is_attacked
+

@@ -14,9 +14,9 @@ def redrawAll(app, canvas):
     """
     # Variables needed to be updated
     map_size = min(app.width, app.height) - 100
+    cell_size = map_size / app.map_blocks
     map_start_x = (app.width - map_size) / 2
     map_start_y = app.height - map_size - 10
-    cell_size = map_size / app.map_blocks
 
     # Draw Map
     canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size, fill='#C9A946')
@@ -34,6 +34,14 @@ def redrawAll(app, canvas):
 
     canvas.create_rectangle(0, 0, map_start_x, app.height, fill='#969285', outline='black')
     canvas.create_rectangle(map_start_x + map_size, 0, app.width, app.height, fill='#969285', outline='black')
+
+    # Show the HP
+    canvas.create_text(map_start_x + 50, map_start_y - 50, text=f"HP: {app.player.getHP()}",
+                       fill='black', font='Helvetica 15 bold')
+
+    if app.is_game_over:
+        canvas.create_text(map_start_x + 100, map_start_y - 50, text="GAME OVER!",
+                           fill='red', font='Helvetica 15 bold')
 
 
 def runZombieWorldViewer():
