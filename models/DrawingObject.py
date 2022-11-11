@@ -1,3 +1,6 @@
+from utils.utils import *
+
+
 class DrawingObject:
     def __init__(self, x, y, size, shape, direction, color):
         self.x = x
@@ -16,10 +19,11 @@ class DrawingObject:
     def getDirection(self):
         return self.direction
 
-    def drawObject(self, app, canvas, start_canvas_x, start_canvas_y, cell_size):
-        size = self.size * cell_size
-        # TODO: Something is going wrong with this calculation
+    def drawObject(self, app, canvas, cell_size):
+        drawing_size = self.size * cell_size
+        cx, cy = getCXY(app, self.x, self.y)
+
         if self.shape == "Circle":
-            left_x = start_canvas_x + cell_size * (self.x - self.size + 1)
-            up_y = start_canvas_y + cell_size * (99 - self.y + self.size - 1)
-            canvas.create_oval(left_x, up_y, left_x + self.size * cell_size, up_y + self.size * cell_size, fill=self.color, outline='black')
+            drawing_size /= 2
+            canvas.create_oval(cx - drawing_size, cy - drawing_size, cx + drawing_size,
+                               cy + drawing_size, fill=self.color, outline='black')

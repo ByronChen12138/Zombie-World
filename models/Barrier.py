@@ -2,10 +2,8 @@ from models.DrawingObject import DrawingObject
 
 
 class Barrier(DrawingObject):
-    def __init__(self, x, y, breakable):
-        self.x = x
-        self.y = y
-        self.size = 3
+    def __init__(self, x, y, breakable, shape, direction, color):
+        super().__init__(x, y, 3, shape, direction, color)
         self.breakable = breakable
         self.shape = "Square"
 

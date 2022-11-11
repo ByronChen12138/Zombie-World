@@ -34,7 +34,7 @@ def isPositionLegal(x, y):
     :param y: y relative position
     :return: True if legal, False if illegal
     """
-    # TODO: Judge it with canves xy, input app
+    # TODO: Judge it with canves xy, input app?
     if 0 <= x < MAP_BLOCKS and 0 <= y < MAP_BLOCKS:
         return True
     return False
