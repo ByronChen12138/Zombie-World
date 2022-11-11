@@ -3,16 +3,24 @@ from utils.utils import *
 
 
 class Character(DrawingObject):
-    def __init__(self, x, y, size, direction, color, HP, speed):
+    def __init__(self, x, y, size, direction, color, HP, speed, damage, heat_rate):
         super().__init__(x, y, size, "Circle", direction, color)
         self.HP = HP
         self.speed = speed
+        self.damage = damage
+        self.heat_rate = heat_rate
 
     def getHP(self):
         return self.HP
 
     def getSpeed(self):
         return self.speed
+
+    def getDamage(self):
+        return self.damage
+
+    def getHeatRate(self):
+        return self.heat_rate
 
     def move(self):
         """

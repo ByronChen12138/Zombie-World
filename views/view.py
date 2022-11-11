@@ -23,10 +23,10 @@ def redrawAll(app, canvas):
 
     # Draw Zombies
     for z in app.zombies:
-        z.drawObject(canvas, map_start_x, map_start_y, cell_size)
+        z.drawObject(app, canvas, map_start_x, map_start_y, cell_size)
 
     # Draw Player
-    app.player.drawObject(canvas, map_start_x, map_start_y, cell_size)
+    app.player.drawObject(app, canvas, map_start_x, map_start_y, cell_size)
 
     # Draw Background
     canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
