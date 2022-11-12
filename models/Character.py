@@ -38,13 +38,6 @@ class Character(DrawingObject):
 
         return False
 
-    def attack(self, character):
-        """
-        Attack the character with self damage
-        :return: None
-        """
-        character.HP -= self.damage
-
     def isDied(self):
         """
         If the HP goes to 0, die

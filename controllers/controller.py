@@ -23,17 +23,20 @@ def keyPressed(app, event):
         app.player.direction = DIRECTIONS["Up"]
         app.player.move()
 
-    elif event.key == "Down":
+    if event.key == "Down":
         app.player.direction = DIRECTIONS["Down"]
         app.player.move()
 
-    elif event.key == "Left":
+    if event.key == "Left":
         app.player.direction = DIRECTIONS["Left"]
         app.player.move()
 
-    elif event.key == "Right":
+    if event.key == "Right":
         app.player.direction = DIRECTIONS["Right"]
         app.player.move()
+
+    if event.key == "Space":
+        app.player.shoot()
 
 
 def timerFired(app):
@@ -45,9 +48,22 @@ def timerFired(app):
     # 10 unit time of invincible time once the player is attacked
     if app.player.invincible_time <= 0:
         if doAttacksToPlayer(app):
-            app.player.invincible_time = 10
+            app.player.invincible_time = INVINCIBLE_TIME
     else:
         app.player.invincible_time -= 1
+
+    # Bullet hit zombie
+    doAttacksToZombies(app)
+
+    # Bullet move
+    for b in app.player.bullets:
+        b.move()
+
+    # Check if Zombie is died
+    for z in copy.copy(app.zombies):
+        if z.getHP() <= 0:
+            app.score += z.getScore()
+            app.zombies.remove(z)
 
     # Check if player is died
     if app.player.isDied():

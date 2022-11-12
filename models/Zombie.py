@@ -13,3 +13,10 @@ class Zombie(Character):
 
     def getScore(self):
         return self.score
+
+    def attack(self, character):
+        """
+        Attack the character with self damage
+        :return: None
+        """
+        character.HP -= self.damage

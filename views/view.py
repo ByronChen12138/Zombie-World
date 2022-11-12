@@ -28,6 +28,10 @@ def redrawAll(app, canvas):
     # Draw Player
     app.player.drawObject(app, canvas, cell_size)
 
+    # Draw Bullets
+    for b in app.player.bullets:
+        b.drawObject(app, canvas, cell_size)
+
     # Draw Background
     canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
     canvas.create_rectangle(0, map_start_y + map_size, app.width, app.height, fill='#E2D9B8', outline='black')
@@ -37,6 +41,10 @@ def redrawAll(app, canvas):
 
     # Show the HP
     canvas.create_text(map_start_x + 50, map_start_y - 50, text=f"HP: {app.player.getHP()}",
+                       fill='black', font='Helvetica 15 bold')
+
+    # Show the Score
+    canvas.create_text(map_start_x + 200, map_start_y - 50, text=f"Score: {app.score}",
                        fill='black', font='Helvetica 15 bold')
 
     if app.is_game_over:

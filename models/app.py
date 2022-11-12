@@ -11,13 +11,11 @@ def appStarted(app):
     """
     # app.timerDelay = 1
     app.is_game_over = False
+    app.score = 0
     app.map_blocks = MAP_BLOCKS
     app.player = Player()
     app.zombies = set()
     for i in range(ZOMBIE_NUM):
         x, y, direction, z_type = roll_a_zombie(app)
         app.zombies.add(Zombie(x, y, direction, z_type))
-
-    for z in app.zombies:
-        print(z.appear_rate)
 

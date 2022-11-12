@@ -1,3 +1,4 @@
+import copy
 import random
 
 from database import *
@@ -65,6 +66,29 @@ def roll_a_zombie(app):
     return x, y, direction, z_type
 
 
+def roll_a_gun(app):
+    """
+    Choose a random gun according to their appear rate.
+    :param app: Current app object
+    :return: x and y positions but a distance away from player, and type of the zombie
+    """
+    x = random.randint(0, 99)
+    y = random.randint(0, 99)
+    while getDistance(app.player.x, app.player.y, x, y) < GUN_LEGAL_DIS:
+        x = random.randint(0, 99)
+        y = random.randint(0, 99)
+
+    num = random.randint(1, 10000)
+    g_type = G_TYPE_LIST[-1]
+    for g in G_TYPE_LIST:
+        # TODO: Possible Error if G_TYPE changed
+        num -= G_TYPE[g][-1] * 100
+        if num <= 0:
+            g_type = g
+            break
+    return x, y, g_type
+
+
 def isCircleTouch(app, cell_size, obj1, obj2):
     """
     Check if two circle is in touch in the canvas
@@ -104,3 +128,22 @@ def doAttacksToPlayer(app):
 
     return is_attacked
 
+
+def doAttacksToZombies(app):
+    """
+    Do possible attack to zombies
+    :param app: Current app object
+    :return: If any attack, return True; else False
+    """
+    map_size = min(app.width, app.height) - 100
+    cell_size = map_size / app.map_blocks
+    is_attacked = False
+
+    for zombie in app.zombies:
+        for bullet in copy.copy(app.player.bullets):
+            if isCircleTouch(app, cell_size, zombie, bullet):
+                bullet.attack(zombie)
+                app.player.bullets.remove(bullet)
+                is_attacked = True
+
+    return is_attacked
