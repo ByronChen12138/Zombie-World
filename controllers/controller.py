@@ -21,19 +21,19 @@ def keyPressed(app, event):
     """
     if event.key == "Up":
         app.player.direction = DIRECTIONS["Up"]
-        app.player.move()
+        app.player.move(app)
 
     if event.key == "Down":
         app.player.direction = DIRECTIONS["Down"]
-        app.player.move()
+        app.player.move(app)
 
     if event.key == "Left":
         app.player.direction = DIRECTIONS["Left"]
-        app.player.move()
+        app.player.move(app)
 
     if event.key == "Right":
         app.player.direction = DIRECTIONS["Right"]
-        app.player.move()
+        app.player.move(app)
 
     if event.key == "Space" and app.player.shoot_time <= 0:
         app.player.shoot()
@@ -66,8 +66,9 @@ def timerFired(app):
     doAttacksToZombies(app)
 
     # Bullet move
-    for b in app.player.bullets:
-        b.move()
+    for b in copy.copy(app.player.bullets):
+        if not b.move(app):
+            app.player.bullets.remove(b)
 
     # Check if Zombie is died
     for z in copy.copy(app.zombies):

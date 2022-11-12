@@ -22,7 +22,7 @@ class Character(DrawingObject):
     def getHeatRate(self):
         return self.heat_rate
 
-    def move(self):
+    def move(self, app):
         """
         Move the character to the direction heading to
         :return: True if succeed to move, False if not
@@ -31,7 +31,7 @@ class Character(DrawingObject):
         new_x = self.x - dx * self.speed
         new_y = self.y - dy * self.speed
 
-        if isPositionLegal(new_x, new_y):
+        if isCirclePositionLegal(app, new_x, new_y, self.size):
             self.x = new_x
             self.y = new_y
             return True

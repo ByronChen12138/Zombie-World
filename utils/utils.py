@@ -28,15 +28,28 @@ def getCXY(app, x, y):
     return cx, cy
 
 
-def isPositionLegal(x, y):
+def isCirclePositionLegal(app, x, y, size):
     """
-    Check if the position is legal.
+    Check if the position of the circle is legal, which is inside the map.
+    :param app: Current app obj
     :param x: x relative position
     :param y: y relative position
+    :param size: The size of the current circle
     :return: True if legal, False if illegal
     """
-    # TODO: Judge it with canves xy, input app?
-    if 0 <= x < MAP_BLOCKS and 0 <= y < MAP_BLOCKS:
+    map_size = min(app.width, app.height) - 100
+    cell_size = map_size / app.map_blocks
+    map_start_x = (app.width - map_size) / 2
+    map_start_y = app.height - map_size - 10
+    map_end_x = map_start_x + map_size
+    map_end_y = map_start_y + map_size
+    drawing_size = size * cell_size / 2
+    cx, cy = getCXY(app, x, y)
+
+    if map_start_x <= cx - drawing_size and \
+            cx + drawing_size <= map_end_x and \
+            map_start_y <= cy - drawing_size and \
+            cy + drawing_size <= map_end_y:
         return True
     return False
 
@@ -155,6 +168,5 @@ def doTimeUpd(app):
     :param app: Current app object
     :return: If any attack, return True; else False
     """
-
     app.player.invincible_time -= 1
     app.player.shoot_time -= 1
