@@ -5,6 +5,7 @@ ZOMBIE_NUM = 10
 ZOMBIE_LEGAL_DIS = 25
 INVINCIBLE_TIME = 11
 GUN_LEGAL_DIS = 10
+NUM_OF_WALL = 15
 
 DIRECTIONS = {"Up": (0, 1),
               "Down": (0, -1),
@@ -22,7 +23,15 @@ Z_TYPE_LIST = ["Normal", "Speed", "Tank"]
 # Size, Ammo, Heat Rate, Color, Damage, Speed, Appear Rate
 G_TYPE = {
     "Pistol": [2, math.inf, 2, "yellow", 10, 2, 0],
-    "Submachine": [3, 100, 1, "#9F5A5A", 20, 2, 60],
+    "Submachine": [3, 60, 1, "#9F5A5A", 20, 2, 60],
     "Sniper": [4, 8, 5, "#7F9591", 100, 2, 40]
 }
 G_TYPE_LIST = ["Pistol", "Submachine", "Sniper"]
+
+# Size, HP, Color
+B_TYPE = {
+    "Wall": [3, math.inf, "#757575"],
+    "Box": [3, 50, "#EE9906"],
+    "Oil Drum": [3, 30, "#FF3636"]
+}
+B_TYPE_LIST = {"Wall", "Box", "Oil Drum"}

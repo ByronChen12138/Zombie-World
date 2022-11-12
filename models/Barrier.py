@@ -1,11 +1,12 @@
+from utils.utils import *
 from models.DrawingObject import DrawingObject
 
 
 class Barrier(DrawingObject):
-    def __init__(self, x, y, breakable, shape, direction, color):
-        super().__init__(x, y, 3, shape, direction, color)
-        self.breakable = breakable
-        self.shape = "Square"
+    def __init__(self, x, y, direction, b_type):
+        size, HP, color = B_TYPE[b_type]
+        super().__init__(x, y, size, "Square", direction, color)
+        self.HP = HP
 
-    def isBreakable(self):
-        return self.breakable
+    def getHP(self):
+        return self.HP

@@ -23,4 +23,6 @@ def appStarted(app):
 
     app.guns = set()
 
-    app.map = [[None for _ in range(MAP_BLOCKS)] for _ in range(MAP_BLOCKS)]
+    createNewMap(app)
+
+

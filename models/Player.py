@@ -11,7 +11,7 @@ class Player(Character):
         self.guns = {"Pistol": ammo, "Submachine": 0, "Sniper": 0}
         self.curr_gun = "Pistol"
         self.curr_ammo = self.guns[self.curr_gun]
-        self.barriers = {"Box": 100, "Oil Drum": 10}
+        self.barriers = {"Box": 50, "Oil Drum": 2}
         self.invincible_time = 0
         self.bullets = []
         self.shoot_time = 0
@@ -39,3 +39,9 @@ class Player(Character):
             self.shoot_time = heat_rate
             self.guns[self.curr_gun] -= 1
             self.curr_ammo = self.guns[self.curr_gun]
+
+    def putBarrier(self, app, barrier):
+        size, HP, color = B_TYPE[barrier]
+        if self.barriers[barrier.b_type] > 0:
+            # TODO: Put Barrier at the front of the player
+            pass

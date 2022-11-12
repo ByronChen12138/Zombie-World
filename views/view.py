@@ -21,14 +21,18 @@ def redrawAll(app, canvas):
     # Draw Map
     canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
                             width=6, fill='#C9A946')
+    for i in range(MAP_BLOCKS):
+        for j in range(MAP_BLOCKS):
+            curr_block = app.map[j][i]
+            if curr_block:
+                cx, cy = getCXY(app, i, j)
+                canvas.create_rectangle(cx - cell_size / 2, cy - cell_size / 2,
+                                        cx + cell_size / 2, cy + cell_size / 2,
+                                        width=0, fill=B_TYPE[curr_block][-1])
 
     # Draw Guns
     for g in app.guns:
         g.drawObject(app, canvas, cell_size)
-
-    # Draw Zombies
-    for z in app.zombies:
-        z.drawObject(app, canvas, cell_size)
 
     # Draw Player
     app.player.drawObject(app, canvas, cell_size)
@@ -36,6 +40,10 @@ def redrawAll(app, canvas):
     # Draw Bullets
     for b in app.player.bullets:
         b.drawObject(app, canvas, cell_size)
+
+    # Draw Zombies
+    for z in app.zombies:
+        z.drawObject(app, canvas, cell_size)
 
     # Draw Background
     canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
