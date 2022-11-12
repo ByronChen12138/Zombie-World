@@ -9,6 +9,7 @@ class Character(DrawingObject):
         self.speed = speed
         self.damage = damage
         self.heat_rate = heat_rate
+        self.move_time = 0
 
     def getHP(self):
         return self.HP
@@ -28,12 +29,13 @@ class Character(DrawingObject):
         :return: True if succeed to move, False if not
         """
         dx, dy = self.direction
-        new_x = self.x - dx * self.speed
-        new_y = self.y - dy * self.speed
+        new_x = self.x - dx
+        new_y = self.y - dy
 
         if isCirclePositionLegal(app, new_x, new_y, self.size):
             self.x = new_x
             self.y = new_y
+            self.move_time = self.speed
             return True
 
         return False

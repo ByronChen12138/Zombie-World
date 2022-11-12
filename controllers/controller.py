@@ -1,3 +1,4 @@
+from models.Zombie import Zombie
 from utils.cmu_112_graphics import *
 from utils.utils import *
 
@@ -21,19 +22,23 @@ def keyPressed(app, event):
     """
     if event.key == "Up":
         app.player.direction = DIRECTIONS["Up"]
-        app.player.move(app)
+        if app.player.move_time <= 0:
+            app.player.move(app)
 
     if event.key == "Down":
         app.player.direction = DIRECTIONS["Down"]
-        app.player.move(app)
+        if app.player.move_time <= 0:
+            app.player.move(app)
 
     if event.key == "Left":
         app.player.direction = DIRECTIONS["Left"]
-        app.player.move(app)
+        if app.player.move_time <= 0:
+            app.player.move(app)
 
     if event.key == "Right":
         app.player.direction = DIRECTIONS["Right"]
-        app.player.move(app)
+        if app.player.move_time <= 0:
+            app.player.move(app)
 
     if event.key == "Space" and app.player.shoot_time <= 0:
         app.player.shoot()
@@ -54,10 +59,22 @@ def timerFired(app):
     :param app: Current app object
     :return: None
     """
+    # Update difficulty
+    if 100 < app.score <= 300:
+        app.zombie_num = 20
+
+    elif 300 < app.score:
+        app.zombie_num = 30
+
     # 10 unit time of invincible time once the player is attacked
     if app.player.invincible_time <= 0:
         if doAttacksToPlayer(app):
             app.player.invincible_time = INVINCIBLE_TIME
+
+    # Update new zombie if needed
+    while len(app.zombies) < app.zombie_num:
+        x, y, direction, z_type = roll_a_zombie(app)
+        app.zombies.add(Zombie(x, y, direction, z_type))
 
     # Update all the cold time
     doTimeUpd(app)

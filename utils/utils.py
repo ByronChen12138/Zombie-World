@@ -170,3 +170,6 @@ def doTimeUpd(app):
     """
     app.player.invincible_time -= 1
     app.player.shoot_time -= 1
+    app.player.move_time -= 1
+    for z in app.zombies:
+        z.move_time -= 1

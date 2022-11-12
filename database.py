@@ -14,9 +14,9 @@ DIRECTIONS_LIST = ["Up", "Down", "Left", "Right"]
 
 # Size, HP, Speed, Color, Damage, Heat Rate, Appear Rate, Score
 Z_TYPE = {
-    "Normal": [4, 100, 1, "#00DE72", 5, 1, 80, 5],
-    "Speed": [3, 30, 3, "#008CE1", 3, 3, 10, 10],
-    "Tank": [6, 300, 0.2, "red", 20, 0.2, 10, 20]}
+    "Normal": [4, 100, 2, "#00DE72", 5, 1, 80, 5],
+    "Speed": [3, 30, 0, "#008CE1", 3, 3, 10, 10],
+    "Tank": [6, 300, 4, "red", 20, 0.2, 10, 20]}
 Z_TYPE_LIST = ["Normal", "Speed", "Tank"]
 
 # Size, Ammo, Heat Rate, Color, Damage, Speed, Appear Rate
