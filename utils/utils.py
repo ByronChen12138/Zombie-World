@@ -60,12 +60,6 @@ def roll_a_zombie(app):
     :param app: Current app object
     :return: x and y positions but a distance away from player, direction, and type of the zombie
     """
-    x = random.randint(0, 99)
-    y = random.randint(0, 99)
-    while getDistance(app.player.x, app.player.y, x, y) < ZOMBIE_LEGAL_DIS:
-        x = random.randint(0, 99)
-        y = random.randint(0, 99)
-
     direction = DIRECTIONS[DIRECTIONS_LIST[random.randint(0, 3)]]
 
     num = random.randint(1, 10000)
@@ -76,6 +70,14 @@ def roll_a_zombie(app):
         if num <= 0:
             z_type = z
             break
+
+    x = random.randint(0, 99)
+    y = random.randint(0, 99)
+    while getDistance(app.player.x, app.player.y, x, y) < ZOMBIE_LEGAL_DIS or \
+            not isCirclePositionLegal(app, x, y, Z_TYPE[z_type][0]):
+        x = random.randint(0, 99)
+        y = random.randint(0, 99)
+
     return x, y, direction, z_type
 
 
@@ -102,16 +104,19 @@ def roll_a_gun(app):
     return x, y, g_type
 
 
-def isCircleTouch(app, cell_size, obj1, obj2):
+def isTouch(app, cell_size, obj1, obj2):
     """
-    Check if two circle is in touch in the canvas
+    Check if two objects are in touch in the canvas
     :param app: Current app object
     :param cell_size: The cell size of the map
     :param obj1: the first obj to check
-    :param obj2: the second obj to check
+    :param obj2: the second obj to check (have to be circle)
     :return: True if in touch; otherwise, False
     """
-    threshold = (obj1.size + obj2.size) * cell_size / 2
+    if obj1.shape == "Circle":
+        threshold = (obj1.size + obj2.size) * cell_size / 2
+    elif obj1.shape == "Gun":
+        threshold = (2 + obj2.size) * cell_size / 2
 
     x, y = obj1.getPosition()
     cx1, cy1 = getCXY(app, x, y)
@@ -135,7 +140,7 @@ def doAttacksToPlayer(app):
     is_attacked = False
 
     for zombie in app.zombies:
-        if isCircleTouch(app, cell_size, zombie, app.player):
+        if isTouch(app, cell_size, zombie, app.player):
             zombie.attack(app.player)
             is_attacked = True
 
@@ -144,7 +149,7 @@ def doAttacksToPlayer(app):
 
 def doAttacksToZombies(app):
     """
-    Do possible attack to zombies
+    Do possible attack to zombies with bullets and delete bullet used
     :param app: Current app object
     :return: If any attack, return True; else False
     """
@@ -154,7 +159,7 @@ def doAttacksToZombies(app):
 
     for zombie in app.zombies:
         for bullet in copy.copy(app.player.bullets):
-            if isCircleTouch(app, cell_size, zombie, bullet):
+            if isTouch(app, cell_size, zombie, bullet):
                 bullet.attack(zombie)
                 app.player.bullets.remove(bullet)
                 is_attacked = True
@@ -173,3 +178,23 @@ def doTimeUpd(app):
     app.player.move_time -= 1
     for z in app.zombies:
         z.move_time -= 1
+    app.gun_time -= 1
+
+
+def pickGun(app):
+    """
+    Check all the guns to pickup and do it
+    :param app: Current app obj
+    :return: If any pickup, return True; else False
+    """
+    map_size = min(app.width, app.height) - 100
+    cell_size = map_size / app.map_blocks
+    is_picked = False
+
+    for g in copy.copy(app.guns):
+        if isTouch(app, cell_size, g, app.player):
+            app.player.pickUpAGun(g)
+            app.guns.remove(g)
+            is_picked = True
+
+    return is_picked

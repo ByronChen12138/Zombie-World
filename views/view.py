@@ -22,6 +22,10 @@ def redrawAll(app, canvas):
     canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
                             width=6, fill='#C9A946')
 
+    # Draw Guns
+    for g in app.guns:
+        g.drawObject(app, canvas, cell_size)
+
     # Draw Zombies
     for z in app.zombies:
         z.drawObject(app, canvas, cell_size)
@@ -49,6 +53,10 @@ def redrawAll(app, canvas):
 
     # Show the Score
     canvas.create_text(map_start_x + 200, map_start_y - 50, text=f"Score: {app.score}",
+                       fill='black', font='Helvetica 15 bold')
+
+    # Show the Ammo
+    canvas.create_text(map_start_x + 500, map_start_y - 50, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
                        fill='black', font='Helvetica 15 bold')
 
     if app.is_game_over:

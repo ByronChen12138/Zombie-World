@@ -1,3 +1,4 @@
+from models.Gun import Gun
 from models.Zombie import Zombie
 from utils.cmu_112_graphics import *
 from utils.utils import *
@@ -62,7 +63,6 @@ def timerFired(app):
     # Update difficulty
     if 100 < app.score <= 300:
         app.zombie_num = 20
-
     elif 300 < app.score:
         app.zombie_num = 30
 
@@ -70,6 +70,18 @@ def timerFired(app):
     if app.player.invincible_time <= 0:
         if doAttacksToPlayer(app):
             app.player.invincible_time = INVINCIBLE_TIME
+            app.player.color = "#DB1EF1"
+        else:
+            app.player.color = "black"
+
+    # Update new gun if can
+    if app.gun_time <= 0 and len(app.guns) < 5:
+        x, y, g_type = roll_a_gun(app)
+        app.guns.add(Gun(x, y, g_type))
+        app.gun_time = 50
+    else:
+        # If no new gun check gun pickup
+        pickGun(app)
 
     # Update new zombie if needed
     while len(app.zombies) < app.zombie_num:
@@ -78,6 +90,14 @@ def timerFired(app):
 
     # Update all the cold time
     doTimeUpd(app)
+
+    # Bullet hit zombie
+    doAttacksToZombies(app)
+
+    # Zombie move
+    for z in app.zombies:
+        if z.move_time <= 0:
+            z.move(app)
 
     # Bullet hit zombie
     doAttacksToZombies(app)

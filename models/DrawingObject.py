@@ -28,9 +28,17 @@ class DrawingObject:
             canvas.create_oval(cx - drawing_size, cy - drawing_size, cx + drawing_size,
                                cy + drawing_size, fill=self.color, outline='black')
 
-            if self.color == "black":
+            if self.color == "black" or self.color == "#DB1EF1":
                 dx, dy = self.getDirection()
                 dx *= 2
                 dy *= 2
                 canvas.create_line(cx - dx * drawing_size, cy - dy * drawing_size,
-                                   cx, cy, fill='black', width=3)
+                                   cx, cy, fill=self.color, width=3)
+
+        elif self.shape == "Gun":
+            canvas.create_polygon(cx, cy,
+                                  cx, cy + cell_size,
+                                  cx + cell_size, cy + cell_size,
+                                  cx + cell_size, cy - cell_size,
+                                  cx - cell_size, cy - cell_size,
+                                  cx - cell_size, cy, fill=self.color, outline="black")
