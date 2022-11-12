@@ -14,6 +14,7 @@ class Player(Character):
         self.barriers = {"Box": 100, "Oil Drum": 10}
         self.invincible_time = 0
         self.bullets = []
+        self.shoot_time = 0
 
     def pickUpAGun(self, gun):
         g_type = gun.getType()
@@ -29,7 +30,9 @@ class Player(Character):
     def swapGun(self, g_type):
         self.curr_gun = g_type
         self.curr_ammo = self.guns[self.curr_gun]
+        self.shoot_time = 0
 
     def shoot(self):
         size, ammo, heat_rate, color, damage, speed, appear_rate = G_TYPE[self.curr_gun]
         self.bullets.append(Bullet(self.x, self.y, self.direction, color, damage, speed))
+        self.shoot_time = heat_rate

@@ -35,8 +35,17 @@ def keyPressed(app, event):
         app.player.direction = DIRECTIONS["Right"]
         app.player.move()
 
-    if event.key == "Space":
+    if event.key == "Space" and app.player.shoot_time <= 0:
         app.player.shoot()
+
+    if event.key == "1":
+        app.player.swapGun("Pistol")
+
+    if event.key == "2":
+        app.player.swapGun("Submachine")
+
+    if event.key == "3":
+        app.player.swapGun("Sniper")
 
 
 def timerFired(app):
@@ -49,8 +58,9 @@ def timerFired(app):
     if app.player.invincible_time <= 0:
         if doAttacksToPlayer(app):
             app.player.invincible_time = INVINCIBLE_TIME
-    else:
-        app.player.invincible_time -= 1
+
+    # Update all the cold time
+    doTimeUpd(app)
 
     # Bullet hit zombie
     doAttacksToZombies(app)

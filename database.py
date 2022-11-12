@@ -3,7 +3,7 @@ import math
 MAP_BLOCKS = 100
 ZOMBIE_NUM = 10
 ZOMBIE_LEGAL_DIS = 25
-INVINCIBLE_TIME = 10
+INVINCIBLE_TIME = 11
 GUN_LEGAL_DIS = 10
 
 DIRECTIONS = {"Up": (0, 1),
@@ -21,8 +21,8 @@ Z_TYPE_LIST = ["Normal", "Speed", "Tank"]
 
 # Size, Ammo, Heat Rate, Color, Damage, Speed, Appear Rate
 G_TYPE = {
-    "Pistol": [2, math.inf, 2, "yellow", 5, 1, 0],
-    "Submachine": [3, 100, 5, "#9F5A5A", 20, 1, 50],
-    "Sniper": [4, 8, 0.5, "#7F9591", 100, 1, 50]
+    "Pistol": [2, math.inf, 3, "yellow", 10, 1, 0],
+    "Submachine": [3, 100, 2, "#9F5A5A", 20, 1, 50],
+    "Sniper": [4, 8, 7, "#7F9591", 100, 1, 50]
 }
 G_TYPE_LIST = ["Pistol", "Submachine", "Sniper"]

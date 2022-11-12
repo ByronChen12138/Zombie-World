@@ -147,3 +147,14 @@ def doAttacksToZombies(app):
                 is_attacked = True
 
     return is_attacked
+
+
+def doTimeUpd(app):
+    """
+    Do all the time upd
+    :param app: Current app object
+    :return: If any attack, return True; else False
+    """
+
+    app.player.invincible_time -= 1
+    app.player.shoot_time -= 1
