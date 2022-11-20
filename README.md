@@ -13,7 +13,16 @@ For running the game, you just need to open the file "runZombieWorld.py", and ru
 ***
 
 ## User Manual
-Press <code>R</code> to
+Press <code>Up</code> to move up;
+Press <code>Down</code> to move down;
+Press <code>Left</code> to move left;
+Press <code>Right</code> to move right;
+
+Press <code>1</code> to change to pistol;
+Press <code>2</code> to change to submachine gun;
+Press <code>3</code> to change to sniper gun;
+
+Press <code>Space</code> to shoot;
 
 ***
 
