@@ -1,3 +1,5 @@
+import random
+
 from models.Character import Character
 from database import *
 
@@ -20,3 +22,17 @@ class Zombie(Character):
         :return: None
         """
         character.HP -= self.damage
+
+    def move(self, app):
+        if app.player.x <= self.x:
+            if app.player.y <= self.y:
+                self.direction = DIRECTIONS["Up-Left"]
+            else:
+                self.direction = DIRECTIONS["Down-Left"]
+        else:
+            if app.player.y <= self.y:
+                self.direction = DIRECTIONS["Up-Right"]
+            else:
+                self.direction = DIRECTIONS["Down-Right"]
+
+        super().move(app)

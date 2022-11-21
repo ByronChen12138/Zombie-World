@@ -37,8 +37,8 @@ class DrawingObject:
 
         elif self.shape == "Gun":
             canvas.create_polygon(cx, cy,
-                                  cx, cy + cell_size,
-                                  cx + cell_size, cy + cell_size,
-                                  cx + cell_size, cy - cell_size,
-                                  cx - cell_size, cy - cell_size,
-                                  cx - cell_size, cy, fill=self.color, outline="black")
+                                  cx, cy + cell_size * 1.5,
+                                  cx + cell_size * 1.5, cy + cell_size * 1.5,
+                                  cx + cell_size * 1.5, cy - cell_size * 1.5,
+                                  cx - cell_size * 1.5, cy - cell_size * 1.5,
+                                  cx - cell_size * 1.5, cy, fill=self.color, outline="black")

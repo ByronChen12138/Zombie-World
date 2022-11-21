@@ -7,6 +7,10 @@ class Barrier(DrawingObject):
         size, HP, color = B_TYPE[b_type]
         super().__init__(x, y, size, "Square", direction, color)
         self.HP = HP
+        self.b_type =b_type
 
     def getHP(self):
         return self.HP
+
+    def getBType(self):
+        return self.b_type

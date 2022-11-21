@@ -116,7 +116,7 @@ def isTouch(app, cell_size, obj1, obj2):
     if obj1.shape == "Circle":
         threshold = (obj1.size + obj2.size) * cell_size / 2
     elif obj1.shape == "Gun":
-        threshold = (2 + obj2.size) * cell_size / 2
+        threshold = (3 + obj2.size) * cell_size / 2
 
     x, y = obj1.getPosition()
     cx1, cy1 = getCXY(app, x, y)
@@ -199,40 +199,3 @@ def pickGun(app):
 
     return is_picked
 
-
-def createABarrier(app, x, y, b_type):
-    """
-    Create a barrier in the map with 3x3 blocks
-    :param app: Current app obj
-    :param x: x of barrier
-    :param y: y of barrier
-    :param b_type: Type of the barrier
-    :return: True if success; else False
-    """
-    for i in range(x - 1, x + 2):
-        for j in range(y - 1, y + 2):
-            if 0 <= i <= 99 and 0 <= j <= 99:
-                if app.map[j][i] is not None:
-                    return False
-
-    for i in range(x - 1, x + 2):
-        for j in range(y - 1, y + 2):
-            if 0 <= i <= 99 and 0 <= j <= 99:
-                app.map[j][i] = b_type
-    return True
-
-
-def createNewMap(app):
-    """
-    Create a new map with None and number of walls
-    :param app: Current app obj
-    :return: None
-    """
-    app.map = [[None for _ in range(MAP_BLOCKS)] for _ in range(MAP_BLOCKS)]
-
-    for i in range(NUM_OF_WALL):
-        x = random.randint(0, 99)
-        y = random.randint(0, 99)
-        while not createABarrier(app, x, y, "Wall"):
-            x = random.randint(0, 99)
-            y = random.randint(0, 99)

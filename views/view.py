@@ -1,3 +1,4 @@
+from models.Barrier import Barrier
 from utils.cmu_112_graphics import *
 from utils.utils import *
 
@@ -23,12 +24,12 @@ def redrawAll(app, canvas):
                             width=6, fill='#C9A946')
     for i in range(MAP_BLOCKS):
         for j in range(MAP_BLOCKS):
-            curr_block = app.map[j][i]
-            if curr_block:
+            curr_block = app.map.getMap()[j][i]
+            if isinstance(curr_block, Barrier):
                 cx, cy = getCXY(app, i, j)
                 canvas.create_rectangle(cx - cell_size / 2, cy - cell_size / 2,
                                         cx + cell_size / 2, cy + cell_size / 2,
-                                        width=0, fill=B_TYPE[curr_block][-1])
+                                        width=1, fill=B_TYPE[curr_block.getBType()][-1])
 
     # Draw Guns
     for g in app.guns:

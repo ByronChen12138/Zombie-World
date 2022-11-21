@@ -4,6 +4,9 @@ from utils.cmu_112_graphics import *
 from utils.utils import *
 
 
+# TODO: All the Random obj should check the barrier
+
+
 def mousePressed(app, event):
     """
     Activate when the mouse is click on the canvas when running the app.
