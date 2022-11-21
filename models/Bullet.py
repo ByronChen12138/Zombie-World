@@ -8,6 +8,9 @@ class Bullet(DrawingObject):
         self.damage = damage
         self.speed = speed
 
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
     def getDamage(self):
         return self.damage
 

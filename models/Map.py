@@ -10,6 +10,9 @@ class Map(DrawingObject):
         self.map = [[None for _ in range(MAP_BLOCKS)] for _ in range(MAP_BLOCKS)]
         self.createNewMap()
 
+    def __str__(self):
+        return '\n'.join(['\t'.join([str(cell) for cell in row]) for row in self.map])
+
     def getMap(self):
         return self.map
 

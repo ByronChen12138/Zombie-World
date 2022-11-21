@@ -56,6 +56,9 @@ def keyPressed(app, event):
     if event.key == "3":
         app.player.swapGun("Sniper")
 
+    if event.key == "Enter":
+        print(app.map)
+
 
 def timerFired(app):
     """

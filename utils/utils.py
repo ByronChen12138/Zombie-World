@@ -113,6 +113,8 @@ def isTouch(app, cell_size, obj1, obj2):
     :param obj2: the second obj to check (have to be circle)
     :return: True if in touch; otherwise, False
     """
+    threshold = 0
+
     if obj1.shape == "Circle":
         threshold = (obj1.size + obj2.size) * cell_size / 2
     elif obj1.shape == "Gun":

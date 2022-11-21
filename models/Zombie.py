@@ -10,6 +10,9 @@ class Zombie(Character):
         super().__init__(x, y, size, direction, color, HP, speed, damage, heat_rate)
         self.z_type = z_type
 
+    def __str__(self):
+        return self.z_type
+
     def getAppearRate(self):
         return self.appear_rate
 

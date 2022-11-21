@@ -13,6 +13,9 @@ class Gun(DrawingObject):
         self.damage = damage
         self.appear_rate = appear_rate
 
+    def __str__(self):
+        return self.g_type
+
     def getAmmo(self):
         return self.ammo
 

@@ -11,10 +11,13 @@ class Player(Character):
         self.guns = {"Pistol": ammo, "Submachine": 0, "Sniper": 0}
         self.curr_gun = "Pistol"
         self.curr_ammo = self.guns[self.curr_gun]
-        self.barriers = {"Box": 50, "Oil Drum": 2}
+        self.barriers = {"Box": 50, "OD": 2}
         self.invincible_time = 0
         self.bullets = []
         self.shoot_time = 0
+
+    def __str__(self):
+        return "Player"
 
     def pickUpAGun(self, gun):
         g_type = gun.getType()
