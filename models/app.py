@@ -24,7 +24,7 @@ def appStarted(app):
         x, y, direction, z_type = roll_a_zombie(app)
         new_zombie = Zombie(x, y, direction, z_type)
         app.zombies.add(new_zombie)
-        app.map.createAnObj(x, y, new_zombie)
+        app.map.createAnObj(new_zombie)
 
     app.guns = set()
 

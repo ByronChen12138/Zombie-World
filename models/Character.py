@@ -33,9 +33,12 @@ class Character(DrawingObject):
         new_y = self.y - dy
 
         if isCirclePositionLegal(app, new_x, new_y, self.size):
+            app.map.removeAnObj(self)
+
             self.x = new_x
             self.y = new_y
             self.move_time = self.speed
+            app.map.createAnObj(self)
             return True
 
         return False

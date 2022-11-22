@@ -49,7 +49,8 @@ def isCirclePositionLegal(app, x, y, size):
     if map_start_x <= cx - drawing_size and \
             cx + drawing_size <= map_end_x and \
             map_start_y <= cy - drawing_size and \
-            cy + drawing_size <= map_end_y:
+            cy + drawing_size <= map_end_y and \
+            not app.map.anyBarrier(x, y, size):
         return True
     return False
 
@@ -200,4 +201,3 @@ def pickGun(app):
             is_picked = True
 
     return is_picked
-

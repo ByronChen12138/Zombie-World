@@ -11,21 +11,20 @@ class Map(DrawingObject):
         self.createNewMap()
 
     def __str__(self):
+        # Citation: https://stackoverflow.com/questions/13214809/pretty-print-2d-list
         return '\n'.join(['\t'.join([str(cell) for cell in row]) for row in self.map])
 
     def getMap(self):
         return self.map
 
-    def createAnObj(self, x, y, obj):
+    def createAnObj(self, obj):
         """
         Create an object on the map
-        :param x: x
-        :param y: y
         :param obj: object to be created
         :return: None
         """
-        for i in range(x - obj.size // 2, x + obj.size // 2 + 1):
-            for j in range(y - obj.size // 2, y + obj.size // 2 + 1):
+        for i in range(obj.x - obj.size // 2, obj.x + obj.size // 2 + 1):
+            for j in range(obj.y - obj.size // 2, obj.y + obj.size // 2 + 1):
                 if 0 <= i <= 99 and 0 <= j <= 99:
                     self.map[j][i] = obj
 
@@ -44,7 +43,7 @@ class Map(DrawingObject):
                         return False
 
         barrier = Barrier(x, y, (1, 0), b_type)
-        self.createAnObj(x, y, barrier)
+        self.createAnObj(barrier)
 
         return True
 
@@ -53,7 +52,7 @@ class Map(DrawingObject):
         Create a new map with None and number of walls
         :return: None
         """
-        self.createAnObj(50, 50, self.player)
+        self.createAnObj(self.player)
 
         for i in range(NUM_OF_WALL):
             x = random.randint(0, 99)
@@ -61,3 +60,23 @@ class Map(DrawingObject):
             while not self.createABarrier(x, y, "Wall"):
                 x = random.randint(0, 99)
                 y = random.randint(0, 99)
+
+    def removeAnObj(self, obj):
+        """
+        Remove obj from the map
+        :param obj: Obj to be deleted
+        :return:
+        """
+
+        for i in range(obj.x - obj.size // 2, obj.x + obj.size // 2 + 1):
+            for j in range(obj.y - obj.size // 2, obj.y + obj.size // 2 + 1):
+                if 0 <= i <= 99 and 0 <= j <= 99:
+                    self.map[j][i] = None
+
+    def anyBarrier(self, x, y, size):
+        for i in range(x - size // 2, x + size // 2 + 1):
+            for j in range(y - size // 2, y + size // 2 + 1):
+                if 0 <= i <= 99 and 0 <= j <= 99:
+                    if isinstance(self.map[j][i], Barrier):
+                        return True
+        return False
