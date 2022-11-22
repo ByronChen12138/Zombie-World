@@ -5,7 +5,7 @@ ZOMBIE_NUM = 10
 ZOMBIE_LEGAL_DIS = 25
 INVINCIBLE_TIME = 11
 GUN_LEGAL_DIS = 10
-NUM_OF_WALL = 20
+NUM_OF_WALL = 10
 
 DIRECTIONS = {"Up": (0, 1),
               "Down": (0, -1),

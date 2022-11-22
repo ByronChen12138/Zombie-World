@@ -2,6 +2,7 @@ import random
 
 from models.Character import Character
 from database import *
+from utils.utils import isCirclePositionLegal
 
 
 class Zombie(Character):
@@ -38,4 +39,17 @@ class Zombie(Character):
             else:
                 self.direction = DIRECTIONS["Down-Right"]
 
-        super().move(app)
+        ans = super().move(app)
+
+        if not ans:
+            # If not moving on the map, attack possible barrier
+            dx, dy = self.direction
+            new_x = self.x - dx
+            new_y = self.y - dy
+
+            is_movable, barrier = isCirclePositionLegal(app, new_x, new_y, self.size)
+
+            if barrier:
+                self.attack(barrier)
+
+        return ans

@@ -35,7 +35,7 @@ def isCirclePositionLegal(app, x, y, size):
     :param x: x relative position
     :param y: y relative position
     :param size: The size of the current circle
-    :return: True if legal, False if illegal
+    :return: (True, None) if legal, (False, barrier) if illegal; barrier is the one on the way
     """
     map_size = min(app.width, app.height) - 100
     cell_size = map_size / app.map_blocks
@@ -46,13 +46,15 @@ def isCirclePositionLegal(app, x, y, size):
     drawing_size = size * cell_size / 2
     cx, cy = getCXY(app, x, y)
 
+    barrier = app.map.anyBarrier(x, y, size)
+
     if map_start_x <= cx - drawing_size and \
             cx + drawing_size <= map_end_x and \
             map_start_y <= cy - drawing_size and \
             cy + drawing_size <= map_end_y and \
-            not app.map.anyBarrier(x, y, size):
-        return True
-    return False
+            barrier is None:
+        return True, None
+    return False, barrier
 
 
 def roll_a_zombie(app):
@@ -72,12 +74,15 @@ def roll_a_zombie(app):
             z_type = z
             break
 
-    x = random.randint(0, 99)
-    y = random.randint(0, 99)
+    size = Z_TYPE[z_type][0]
+    mini, maxi = 0 + size // 2, 99 - size // 2
+
+    x = random.randint(mini, maxi)
+    y = random.randint(mini, maxi)
     while getDistance(app.player.x, app.player.y, x, y) < ZOMBIE_LEGAL_DIS or \
-            not isCirclePositionLegal(app, x, y, Z_TYPE[z_type][0]):
-        x = random.randint(0, 99)
-        y = random.randint(0, 99)
+            not isCirclePositionLegal(app, x, y, size)[0]:
+        x = random.randint(mini, maxi)
+        y = random.randint(mini, maxi)
 
     return x, y, direction, z_type
 

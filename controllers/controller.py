@@ -26,22 +26,22 @@ def keyPressed(app, event):
     """
     if event.key == "Up" or event.key == "w" or event.key == "W":
         app.player.direction = DIRECTIONS["Up"]
-        if app.player.move_time <= 0:
+        if event.key != "Up" and app.player.move_time <= 0:
             app.player.move(app)
 
     if event.key == "Down" or event.key == "s" or event.key == "S":
         app.player.direction = DIRECTIONS["Down"]
-        if app.player.move_time <= 0:
+        if event.key != "Down" and app.player.move_time <= 0:
             app.player.move(app)
 
     if event.key == "Left" or event.key == "a" or event.key == "A":
         app.player.direction = DIRECTIONS["Left"]
-        if app.player.move_time <= 0:
+        if event.key != "Left" and app.player.move_time <= 0:
             app.player.move(app)
 
     if event.key == "Right" or event.key == "d" or event.key == "D":
         app.player.direction = DIRECTIONS["Right"]
-        if app.player.move_time <= 0:
+        if event.key != "Right" and app.player.move_time <= 0:
             app.player.move(app)
 
     if event.key == "Space" and app.player.shoot_time <= 0:

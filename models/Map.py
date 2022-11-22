@@ -78,5 +78,5 @@ class Map(DrawingObject):
             for j in range(y - size // 2, y + size // 2 + 1):
                 if 0 <= i <= 99 and 0 <= j <= 99:
                     if isinstance(self.map[j][i], Barrier):
-                        return True
-        return False
+                        return self.map[j][i]
+        return None

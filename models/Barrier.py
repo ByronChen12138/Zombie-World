@@ -10,10 +10,17 @@ class Barrier(DrawingObject):
         self.b_type = b_type
 
     def __str__(self):
-        return self.b_type
+        return self.b_type + str(self.HP)
 
     def getHP(self):
         return self.HP
 
     def getBType(self):
         return self.b_type
+
+    def isBroken(self):
+        """
+        If the HP goes to 0, die
+        :return: True if died, False if not
+        """
+        return self.HP <= 0

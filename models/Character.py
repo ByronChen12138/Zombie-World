@@ -32,7 +32,9 @@ class Character(DrawingObject):
         new_x = self.x - dx
         new_y = self.y - dy
 
-        if isCirclePositionLegal(app, new_x, new_y, self.size):
+        is_movable, barrier = isCirclePositionLegal(app, new_x, new_y, self.size)
+        if is_movable:
+            # Upd on the map
             app.map.removeAnObj(self)
 
             self.x = new_x
