@@ -43,8 +43,10 @@ class Player(Character):
             self.guns[self.curr_gun] -= 1
             self.curr_ammo = self.guns[self.curr_gun]
 
-    def putBarrier(self, app, barrier):
-        size, HP, color = B_TYPE[barrier]
-        if self.barriers[barrier.b_type] > 0:
-            # TODO: Put Barrier at the front of the player
-            pass
+    def putBarrier(self, app, b_type):
+        if self.barriers[b_type] > 0:
+            bx, by = self.direction
+            bx *= -3
+            by *= -3
+            if app.map.createABarrier(self.x + bx, self.y + by, b_type):
+                self.barriers[b_type] -= 1

@@ -24,22 +24,22 @@ def keyPressed(app, event):
     :param event: Current event object
     :return: None
     """
-    if event.key == "Up":
+    if event.key == "Up" or event.key == "w" or event.key == "W":
         app.player.direction = DIRECTIONS["Up"]
         if app.player.move_time <= 0:
             app.player.move(app)
 
-    if event.key == "Down":
+    if event.key == "Down" or event.key == "s" or event.key == "S":
         app.player.direction = DIRECTIONS["Down"]
         if app.player.move_time <= 0:
             app.player.move(app)
 
-    if event.key == "Left":
+    if event.key == "Left" or event.key == "a" or event.key == "A":
         app.player.direction = DIRECTIONS["Left"]
         if app.player.move_time <= 0:
             app.player.move(app)
 
-    if event.key == "Right":
+    if event.key == "Right" or event.key == "d" or event.key == "D":
         app.player.direction = DIRECTIONS["Right"]
         if app.player.move_time <= 0:
             app.player.move(app)
@@ -58,6 +58,12 @@ def keyPressed(app, event):
 
     if event.key == "Enter":
         print(app.map)
+
+    if event.key == "e" or event.key == "E":
+        app.player.putBarrier(app, "Box")
+
+    if event.key == "q" or event.key == "Q":
+        app.player.putBarrier(app, "OD")
 
 
 def timerFired(app):
