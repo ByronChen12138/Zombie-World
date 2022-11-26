@@ -13,64 +13,72 @@ def redrawAll(app, canvas):
     :param canvas: Current canvas object
     :return: None
     """
-    # Variables needed to be updated
-    map_size = min(app.width, app.height) - 100
-    cell_size = map_size / app.map_blocks
-    map_start_x = (app.width - map_size) / 2
-    map_start_y = app.height - map_size - 10
 
-    # Draw Map
-    canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
-                            width=6, fill='#C9A946')
-    for i in range(MAP_BLOCKS):
-        for j in range(MAP_BLOCKS):
-            curr_block = app.map.getMap()[j][i]
-            if isinstance(curr_block, Barrier):
-                cx, cy = getCXY(app, i, j)
-                canvas.create_rectangle(cx - cell_size / 2, cy - cell_size / 2,
-                                        cx + cell_size / 2, cy + cell_size / 2,
-                                        width=1, fill=B_TYPE[curr_block.getBType()][-1])
+    if app.UI == "menu":
+        pass
 
-    # Draw Guns
-    for g in app.guns:
-        g.drawObject(app, canvas, cell_size)
+    elif app.UI == "game":
+        # Variables needed to be updated
+        map_size = min(app.width, app.height) - 100
+        cell_size = map_size / app.map_blocks
+        map_start_x = (app.width - map_size) / 2
+        map_start_y = app.height - map_size - 10
 
-    # Draw Player
-    app.player.drawObject(app, canvas, cell_size)
+        # Draw Map
+        canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
+                                width=6, fill='#C9A946')
+        for i in range(MAP_BLOCKS):
+            for j in range(MAP_BLOCKS):
+                curr_block = app.map.getMap()[j][i]
+                if isinstance(curr_block, Barrier):
+                    cx, cy = getCXY(app, i, j)
+                    canvas.create_rectangle(cx - cell_size / 2, cy - cell_size / 2,
+                                            cx + cell_size / 2, cy + cell_size / 2,
+                                            width=1, fill=B_TYPE[curr_block.getBType()][-1])
 
-    # Draw Bullets
-    for b in app.player.bullets:
-        b.drawObject(app, canvas, cell_size)
+        # Draw Guns
+        for g in app.guns:
+            g.drawObject(app, canvas, cell_size)
 
-    # Draw Zombies
-    for z in app.zombies:
-        z.drawObject(app, canvas, cell_size)
+        # Draw Player
+        app.player.drawObject(app, canvas, cell_size)
 
-    # Draw Background
-    canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
-    canvas.create_rectangle(0, map_start_y + map_size, app.width, app.height, fill='#E2D9B8', outline='black')
+        # Draw Bullets
+        for b in app.player.bullets:
+            b.drawObject(app, canvas, cell_size)
 
-    canvas.create_rectangle(0, 0, map_start_x, app.height, fill='#969285', outline='black')
-    canvas.create_rectangle(map_start_x + map_size, 0, app.width, app.height, fill='#969285', outline='black')
+        # Draw Zombies
+        for z in app.zombies:
+            z.drawObject(app, canvas, cell_size)
 
-    canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
-                            width=6, fill=None)
+        # Draw Background
+        canvas.create_rectangle(0, 0, app.width, map_start_y, fill='#E2D9B8', outline='black')
+        canvas.create_rectangle(0, map_start_y + map_size, app.width, app.height, fill='#E2D9B8', outline='black')
 
-    # Show the HP
-    canvas.create_text(map_start_x + 50, map_start_y - 50, text=f"HP: {app.player.getHP()}",
-                       fill='black', font='Helvetica 15 bold')
+        canvas.create_rectangle(0, 0, map_start_x, app.height, fill='#969285', outline='black')
+        canvas.create_rectangle(map_start_x + map_size, 0, app.width, app.height, fill='#969285', outline='black')
 
-    # Show the Score
-    canvas.create_text(map_start_x + 200, map_start_y - 50, text=f"Score: {app.score}",
-                       fill='black', font='Helvetica 15 bold')
+        canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
+                                width=6, fill=None)
 
-    # Show the Ammo
-    canvas.create_text(map_start_x + 500, map_start_y - 50, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
-                       fill='black', font='Helvetica 15 bold')
+        # Show the HP
+        canvas.create_text(map_start_x + 50, map_start_y - 50, text=f"HP: {app.player.getHP()}",
+                           fill='black', font='Helvetica 15 bold')
 
-    if app.is_game_over:
-        canvas.create_text(map_start_x + 100, map_start_y - 50, text="GAME OVER!",
-                           fill='red', font='Helvetica 15 bold')
+        # Show the Score
+        canvas.create_text(map_start_x + 200, map_start_y - 50, text=f"Score: {app.score}",
+                           fill='black', font='Helvetica 15 bold')
+
+        # Show the Ammo
+        canvas.create_text(map_start_x + 500, map_start_y - 50, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
+                           fill='black', font='Helvetica 15 bold')
+
+        if app.is_game_over:
+            canvas.create_text(map_start_x + 100, map_start_y - 50, text="GAME OVER!",
+                               fill='red', font='Helvetica 15 bold')
+
+    else:
+        pass
 
 
 def runZombieWorldViewer():

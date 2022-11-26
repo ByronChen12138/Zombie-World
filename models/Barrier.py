@@ -10,7 +10,7 @@ class Barrier(DrawingObject):
         self.b_type = b_type
 
     def __str__(self):
-        return self.b_type
+        return self.b_type + str(self.HP)
 
     def getHP(self):
         return self.HP

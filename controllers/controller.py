@@ -24,6 +24,8 @@ def keyPressed(app, event):
     :param event: Current event object
     :return: None
     """
+
+    # The move of the player
     if event.key == "Up" or event.key == "w" or event.key == "W":
         app.player.direction = DIRECTIONS["Up"]
         if event.key != "Up" and app.player.move_time <= 0:
@@ -44,9 +46,11 @@ def keyPressed(app, event):
         if event.key != "Right" and app.player.move_time <= 0:
             app.player.move(app)
 
+    # Shoot of the player
     if event.key == "Space" and app.player.shoot_time <= 0:
         app.player.shoot()
 
+    # Swap gun of the player
     if event.key == "1":
         app.player.swapGun("Pistol")
 
@@ -56,9 +60,11 @@ def keyPressed(app, event):
     if event.key == "3":
         app.player.swapGun("Sniper")
 
+    # Get the info for debugging
     if event.key == "Enter":
         print(app.map)
 
+    # Put the box and OD (Oil Drum)
     if event.key == "e" or event.key == "E":
         app.player.putBarrier(app, "Box")
 
@@ -78,14 +84,6 @@ def timerFired(app):
     elif 300 < app.score:
         app.zombie_num = 30
 
-    # 10 unit time of invincible time once the player is attacked
-    if app.player.invincible_time <= 0:
-        if doAttacksToPlayer(app):
-            app.player.invincible_time = INVINCIBLE_TIME
-            app.player.color = "#DB1EF1"
-        else:
-            app.player.color = "black"
-
     # Update new gun if can
     if app.gun_time <= 0 and len(app.guns) < 5:
         x, y, g_type = roll_a_gun(app)
@@ -103,21 +101,20 @@ def timerFired(app):
     # Update all the cold time
     doTimeUpd(app)
 
+    # Reset invincible time once the player is attacked
+    if app.player.invincible_time <= 0:
+        if doAttacksToPlayer(app):
+            app.player.invincible_time = INVINCIBLE_TIME
+            app.player.color = "#DB1EF1"
+        else:
+            app.player.color = "black"
+
+    # Check if player is died
+    if app.player.isDied():
+        app.is_game_over = True
+
     # Bullet hit zombie
     doAttacksToZombies(app)
-
-    # Zombie move
-    for z in app.zombies:
-        if z.move_time <= 0:
-            z.move(app)
-
-    # Bullet hit zombie
-    doAttacksToZombies(app)
-
-    # Bullet move
-    for b in copy.copy(app.player.bullets):
-        if not b.move(app):
-            app.player.bullets.remove(b)
 
     # Check if Zombie is died
     for z in copy.copy(app.zombies):
@@ -125,6 +122,13 @@ def timerFired(app):
             app.score += z.getScore()
             app.zombies.remove(z)
 
-    # Check if player is died
-    if app.player.isDied():
-        app.is_game_over = True
+    # Zombie move
+    for z in app.zombies:
+        if z.move_time <= 0:
+            z.move(app)
+
+    # Bullet move
+    for b in copy.copy(app.player.bullets):
+        if not b.move(app):
+            app.player.bullets.remove(b)
+

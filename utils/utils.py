@@ -75,7 +75,7 @@ def roll_a_zombie(app):
             break
 
     size = Z_TYPE[z_type][0]
-    mini, maxi = 0 + size // 2, 99 - size // 2
+    mini, maxi = 0 + size // 2, MAP_BLOCKS - 1 - size // 2
 
     x = random.randint(mini, maxi)
     y = random.randint(mini, maxi)
@@ -93,11 +93,11 @@ def roll_a_gun(app):
     :param app: Current app object
     :return: x and y positions but a distance away from player, and type of the zombie
     """
-    x = random.randint(0, 99)
-    y = random.randint(0, 99)
+    x = random.randint(0, MAP_BLOCKS - 1)
+    y = random.randint(0, MAP_BLOCKS - 1)
     while getDistance(app.player.x, app.player.y, x, y) < GUN_LEGAL_DIS:
-        x = random.randint(0, 99)
-        y = random.randint(0, 99)
+        x = random.randint(0, MAP_BLOCKS - 1)
+        y = random.randint(0, MAP_BLOCKS - 1)
 
     num = random.randint(1, 10000)
     g_type = G_TYPE_LIST[-1]
@@ -187,6 +187,9 @@ def doTimeUpd(app):
     for z in app.zombies:
         z.move_time -= 1
     app.gun_time -= 1
+    # for b in app.player.bullets:
+    #     if b.acceleration > 1:
+    #         b.acceleration -= 1
 
 
 def pickGun(app):
