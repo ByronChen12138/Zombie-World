@@ -10,6 +10,7 @@ class Zombie(Character):
         size, HP, speed, color, damage, heat_rate, self.appear_rate, self.score = Z_TYPE[z_type]
         super().__init__(x, y, size, direction, color, HP, speed, damage, heat_rate)
         self.z_type = z_type
+        self.move_type = "Direct"
 
     def __str__(self):
         return self.z_type
@@ -27,17 +28,61 @@ class Zombie(Character):
         """
         character.HP -= self.damage
 
-    def move(self, app):
-        if app.player.x <= self.x:
-            if app.player.y <= self.y:
+    def moveRandom(self, app):
+        """
+        Upd the direction for the next move randomly
+        :param app: current app
+        :return: None
+        """
+        index = random.randint(0, 7)
+        self.direction = DIRECTIONS[DIRECTIONS_LIST[index]]
+
+    def moveDirect(self, app):
+        """
+        Upd the direction for the next move directly to the player
+        :param app: current app
+        :return: None
+        """
+        if app.player.x < self.x:
+            if app.player.y < self.y:
                 self.direction = DIRECTIONS["Up-Left"]
+            elif app.player.y == self.y:
+                self.direction = DIRECTIONS["Left"]
             else:
                 self.direction = DIRECTIONS["Down-Left"]
+
+        elif app.player.x == self.x:
+            if app.player.y < self.y:
+                self.direction = DIRECTIONS["Up"]
+            elif app.player.y == self.y:
+                self.direction = (0, 0)
+            else:
+                self.direction = DIRECTIONS["Down"]
+
         else:
             if app.player.y <= self.y:
                 self.direction = DIRECTIONS["Up-Right"]
+            elif app.player.y == self.y:
+                self.direction = DIRECTIONS["Right"]
             else:
                 self.direction = DIRECTIONS["Down-Right"]
+
+    def moveDFS(self, app):
+        """
+        Upd the direction for the next move using DFS
+        :param app: current app
+        :return: None
+        """
+
+    def move(self, app):
+        if self.move_type == "Random":
+            self.moveDirect(app)
+
+        elif self.move_type == "Direct":
+            self.moveDirect(app)
+
+        else:
+            self.moveDFS(app)
 
         ans = super().move(app)
 
