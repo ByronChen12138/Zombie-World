@@ -67,18 +67,28 @@ def redrawAll(app, canvas):
                                 width=6, fill=None)
 
         # Show the HP
-        cx, cy = getCXY(app, 30, 92)
+        cx, cy = getCXY(app, 30, 94)
         canvas.create_text(cx, cy, text=f"HP: {app.player.getHP()}",
                            fill='black', font='Helvetica 15 bold')
 
         # Show the Score
-        cx, cy = getCXY(app, 50, 92)
+        cx, cy = getCXY(app, 42, 94)
         canvas.create_text(cx, cy, text=f"Score: {app.score}",
                            fill='black', font='Helvetica 15 bold')
 
         # Show the Ammo
-        cx, cy = getCXY(app, 70, 92)
+        cx, cy = getCXY(app, 70, 94)
         canvas.create_text(cx, cy, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
+                           fill='black', font='Helvetica 15 bold')
+
+        # Show the Boxes
+        cx, cy = getCXY(app, 57, 96)
+        canvas.create_text(cx, cy, text=f'Boxes: {app.player.barriers["Box"]}',
+                           fill='black', font='Helvetica 15 bold')
+
+        # Show the ODs
+        cx, cy = getCXY(app, 57, 92)
+        canvas.create_text(cx, cy, text=f'Oil Drums: {app.player.barriers["OD"]}',
                            fill='black', font='Helvetica 15 bold')
 
         if app.is_game_over:

@@ -1,5 +1,6 @@
 import random
 
+from models.Barrier import Barrier
 from models.Character import Character
 from database import *
 from utils.utils import isCirclePositionLegal
@@ -95,7 +96,9 @@ class Zombie(Character):
 
             is_movable, barrier = isCirclePositionLegal(app, new_x, new_y, self.size)
 
-            if barrier:
+            if barrier and isinstance(barrier, Barrier):
                 self.attack(barrier)
+                if barrier.isBroken():
+                    app.map.removeAnObj(barrier)
 
         return ans

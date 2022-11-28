@@ -1,3 +1,4 @@
+from models.Barrier import Barrier
 from models.DrawingObject import DrawingObject
 from utils.utils import *
 
@@ -29,7 +30,11 @@ class Bullet(DrawingObject):
             self.y = new_y
             if 0 <= self.y < MAP_BLOCKS and \
                     0 <= self.x < MAP_BLOCKS:
-                self.attack(app.map.getMap()[self.y][self.x])
+                curr_block = app.map.getMap()[self.y][self.x]
+                if curr_block and isinstance(curr_block, Barrier):
+                    self.attack(curr_block)
+                    if curr_block.isBroken():
+                        app.map.removeAnObj(curr_block)
             return True
 
         return False
