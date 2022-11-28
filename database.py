@@ -35,7 +35,7 @@ G_TYPE_LIST = ["Pistol", "Submachine", "Sniper"]
 # Size, HP, Color
 B_TYPE = {
     "Wall": [3, math.inf, "#757575"],
-    "Box": [3, 50, "#EE9906"],
+    "Box": [3, 300, "#EE9906"],
     "OD": [3, 30, "#FF3636"]
 }
 B_TYPE_LIST = {"Wall", "Box", "OD"}

@@ -12,6 +12,7 @@ class Zombie(Character):
         super().__init__(x, y, size, direction, color, HP, speed, damage, heat_rate)
         self.z_type = z_type
         self.move_type = "Direct"
+        self.type = "Zombie"
 
     def __str__(self):
         return self.z_type
@@ -98,7 +99,7 @@ class Zombie(Character):
 
             if barrier and isinstance(barrier, Barrier):
                 self.attack(barrier)
-                if barrier.isBroken():
+                if barrier.isBroken(app):
                     app.map.removeAnObj(barrier)
 
         return ans

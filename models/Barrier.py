@@ -8,6 +8,7 @@ class Barrier(DrawingObject):
         super().__init__(x, y, size, "Square", direction, color)
         self.HP = HP
         self.b_type = b_type
+        self.type = "Barrier"
 
     def __str__(self):
         return self.b_type + str(self.HP)
@@ -18,9 +19,19 @@ class Barrier(DrawingObject):
     def getBType(self):
         return self.b_type
 
-    def isBroken(self):
-        """
-        If the HP goes to 0, die
-        :return: True if died, False if not
-        """
+    def doDamage(self, app):
+        objs = app.map.getSurroundings(self, 5)
+        for obj in objs:
+            if obj.type == "Player":
+                obj.HP -= 20
+            elif isinstance(obj, Barrier):
+                app.map.removeAnObj(obj)
+                if obj.b_type == "OD":
+                    obj.doDamage(app)
+            else:
+                obj.HP -= 200
+
+    def isBroken(self, app):
+        if self.b_type == "OD":
+            self.doDamage(app)
         return self.HP <= 0

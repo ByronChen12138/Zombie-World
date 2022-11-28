@@ -15,6 +15,7 @@ class Player(Character):
         self.invincible_time = 0
         self.bullets = []
         self.shoot_time = 0
+        self.type = "Player"
 
     def __str__(self):
         return "Player"

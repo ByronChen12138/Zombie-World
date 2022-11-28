@@ -33,7 +33,7 @@ class Bullet(DrawingObject):
                 curr_block = app.map.getMap()[self.y][self.x]
                 if curr_block and isinstance(curr_block, Barrier):
                     self.attack(curr_block)
-                    if curr_block.isBroken():
+                    if curr_block.isBroken(app):
                         app.map.removeAnObj(curr_block)
             return True
 
