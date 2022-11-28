@@ -1,5 +1,7 @@
 from models.Gun import Gun
+from models.MyButton import MyButton
 from models.Zombie import Zombie
+from models.app import appStarted
 from utils.cmu_112_graphics import *
 from utils.utils import *
 
@@ -14,7 +16,24 @@ def mousePressed(app, event):
     :param event: Current event object
     :return: None
     """
-    pass
+    for b in app.buttons:
+        if b.isClick(event.x, event.y):
+            if b.text == "Start":
+                app.page_set = False
+                app.UI = "Game"
+
+            elif b.text == "Help":
+                app.page_set = False
+                app.UI = "Help"
+
+            elif b.text == "Back":
+                app.page_set = False
+                app.UI = "Menu"
+
+            elif b.text == "Quit":
+                app.page_set = False
+                app.UI = "Menu"
+                appStarted(app)
 
 
 def keyPressed(app, event):
@@ -24,52 +43,63 @@ def keyPressed(app, event):
     :param event: Current event object
     :return: None
     """
+    if app.pause:
+        app.buttons = set()
+        app.pause = False
+        return
 
-    # The move of the player
-    if event.key == "Up" or event.key == "w" or event.key == "W":
-        app.player.direction = DIRECTIONS["Up"]
-        if event.key != "Up" and app.player.move_time <= 0:
-            app.player.move(app)
+    if app.UI == "Game":
+        # Pause
+        if event.key == "Escape":
+            app.pause = True
+            app.buttons.add(MyButton(app, 50, 50, 4, "#969285", "Quit"))
+            return
 
-    if event.key == "Down" or event.key == "s" or event.key == "S":
-        app.player.direction = DIRECTIONS["Down"]
-        if event.key != "Down" and app.player.move_time <= 0:
-            app.player.move(app)
+        # The move of the player
+        if event.key == "Up" or event.key == "w" or event.key == "W":
+            app.player.direction = DIRECTIONS["Up"]
+            if event.key != "Up" and app.player.move_time <= 0:
+                app.player.move(app)
 
-    if event.key == "Left" or event.key == "a" or event.key == "A":
-        app.player.direction = DIRECTIONS["Left"]
-        if event.key != "Left" and app.player.move_time <= 0:
-            app.player.move(app)
+        if event.key == "Down" or event.key == "s" or event.key == "S":
+            app.player.direction = DIRECTIONS["Down"]
+            if event.key != "Down" and app.player.move_time <= 0:
+                app.player.move(app)
 
-    if event.key == "Right" or event.key == "d" or event.key == "D":
-        app.player.direction = DIRECTIONS["Right"]
-        if event.key != "Right" and app.player.move_time <= 0:
-            app.player.move(app)
+        if event.key == "Left" or event.key == "a" or event.key == "A":
+            app.player.direction = DIRECTIONS["Left"]
+            if event.key != "Left" and app.player.move_time <= 0:
+                app.player.move(app)
 
-    # Shoot of the player
-    if event.key == "Space" and app.player.shoot_time <= 0:
-        app.player.shoot()
+        if event.key == "Right" or event.key == "d" or event.key == "D":
+            app.player.direction = DIRECTIONS["Right"]
+            if event.key != "Right" and app.player.move_time <= 0:
+                app.player.move(app)
 
-    # Swap gun of the player
-    if event.key == "1":
-        app.player.swapGun("Pistol")
+        # Shoot of the player
+        if event.key == "Space" and app.player.shoot_time <= 0:
+            app.player.shoot()
 
-    if event.key == "2":
-        app.player.swapGun("Submachine")
+        # Swap gun of the player
+        if event.key == "1":
+            app.player.swapGun("Pistol")
 
-    if event.key == "3":
-        app.player.swapGun("Sniper")
+        if event.key == "2":
+            app.player.swapGun("Submachine")
 
-    # Get the info for debugging
-    if event.key == "Enter":
-        print(app.map)
+        if event.key == "3":
+            app.player.swapGun("Sniper")
 
-    # Put the box and OD (Oil Drum)
-    if event.key == "e" or event.key == "E":
-        app.player.putBarrier(app, "Box")
+        # Get the info for debugging
+        if event.key == "Enter":
+            print(app.map)
 
-    if event.key == "q" or event.key == "Q":
-        app.player.putBarrier(app, "OD")
+        # Put the box and OD (Oil Drum)
+        if event.key == "e" or event.key == "E":
+            app.player.putBarrier(app, "Box")
+
+        if event.key == "q" or event.key == "Q":
+            app.player.putBarrier(app, "OD")
 
 
 def timerFired(app):
@@ -78,57 +108,81 @@ def timerFired(app):
     :param app: Current app object
     :return: None
     """
-    # Update difficulty
-    if 100 < app.score <= 300:
-        app.zombie_num = 20
-    elif 300 < app.score:
-        app.zombie_num = 30
+    if app.UI == "Menu":
+        if not app.page_set:
+            app.buttons = set()
+            app.buttons.add(MyButton(app, 50, 50, 4, "#E2D9B8", "Start"))
+            app.buttons.add(MyButton(app, 50, 35, 4, "#E2D9B8", "Help"))
+            app.page_set = True
 
-    # Update new gun if can
-    if app.gun_time <= 0 and len(app.guns) < 5:
-        x, y, g_type = roll_a_gun(app)
-        app.guns.add(Gun(x, y, g_type))
-        app.gun_time = 50
-    else:
-        # If no new gun check gun pickup
-        pickGun(app)
+    if app.UI == "Help":
+        if not app.page_set:
+            app.buttons = set()
+            app.buttons.add(MyButton(app, 95, 95, 4, "#E2D9B8", "Back"))
+            app.page_set = True
 
-    # Update new zombie if needed
-    while len(app.zombies) < app.zombie_num:
-        x, y, direction, z_type = roll_a_zombie(app)
-        app.zombies.add(Zombie(x, y, direction, z_type))
+    elif app.UI == "Game" and not app.pause:
+        # Clear the buttons
+        if not app.page_set:
+            app.buttons = set()
+            app.page_set = True
 
-    # Update all the cold time
-    doTimeUpd(app)
+        # Update difficulty
+        if 100 < app.score <= 300:
+            app.zombie_num = 20
+        elif 300 < app.score:
+            app.zombie_num = 30
 
-    # Reset invincible time once the player is attacked
-    if app.player.invincible_time <= 0:
-        if doAttacksToPlayer(app):
-            app.player.invincible_time = INVINCIBLE_TIME
-            app.player.color = "#DB1EF1"
+        # Update new gun if can
+        if app.gun_time <= 0 and len(app.guns) < 5:
+            x, y, g_type = roll_a_gun(app)
+            app.guns.add(Gun(x, y, g_type))
+            app.gun_time = 50
         else:
-            app.player.color = "black"
+            # If no new gun check gun pickup
+            pickGun(app)
 
-    # Check if player is died
-    if app.player.isDied():
-        app.is_game_over = True
+        # Update new zombie if needed
+        while len(app.zombies) < app.zombie_num:
+            x, y, direction, z_type = roll_a_zombie(app)
+            app.zombies.add(Zombie(x, y, direction, z_type))
 
-    # Bullet hit zombie
-    doAttacksToZombies(app)
+        # Update all the cold time
+        doTimeUpd(app)
 
-    # Check if Zombie is died
-    for z in copy.copy(app.zombies):
-        if z.getHP() <= 0:
-            app.score += z.getScore()
-            app.zombies.remove(z)
+        # Reset invincible time once the player is attacked
+        if app.player.invincible_time <= 0:
+            if doAttacksToPlayer(app):
+                app.player.invincible_time = INVINCIBLE_TIME
+                app.player.color = "#DB1EF1"
+            else:
+                app.player.color = "black"
 
-    # Zombie move
-    for z in app.zombies:
-        if z.move_time <= 0:
-            z.move(app)
+        # Check if player is died
+        if app.player.isDied():
+            app.UI = "Over"
+            app.is_game_over = True
+            app.buttons = set()
+            app.buttons.add(MyButton(app, 50, 50, 4, "#969285", "Quit"))
+            app.page_set = True
+            return
 
-    # Bullet move
-    for b in copy.copy(app.player.bullets):
-        if not b.move(app):
-            app.player.bullets.remove(b)
+        # Bullet hit zombie
+        doAttacksToZombies(app)
+
+        # Check if Zombie is died
+        for z in copy.copy(app.zombies):
+            if z.getHP() <= 0:
+                app.score += z.getScore()
+                app.zombies.remove(z)
+
+        # Zombie move
+        for z in app.zombies:
+            if z.move_time <= 0:
+                z.move(app)
+
+        # Bullet move
+        for b in copy.copy(app.player.bullets):
+            if not b.move(app):
+                app.player.bullets.remove(b)
 

@@ -18,7 +18,10 @@ def appStarted(app):
     app.map_blocks = MAP_BLOCKS
     app.player = Player()
     app.map = Map(400, 400, 10, app.player)
-    app.UI = "game"
+    app.UI = "Menu"
+    app.page_set = False
+    app.buttons = set()
+    app.pause = False
 
     app.zombies = set()
     for i in range(app.zombie_num):

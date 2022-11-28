@@ -14,10 +14,15 @@ def redrawAll(app, canvas):
     :return: None
     """
 
-    if app.UI == "menu":
-        pass
+    if app.UI == "Menu":
+        cx, cy = getCXY(app, 50, 80)
+        canvas.create_rectangle(0, 0, app.width,app.height, fill='#E2D9B8')
+        canvas.create_text(cx, cy, text="ZOMBIE WORLD",
+                           fill='black', font='Helvetica 25 bold')
+        for b in app.buttons:
+            b.draw(app, canvas)
 
-    elif app.UI == "game":
+    elif app.UI == "Game":
         # Variables needed to be updated
         map_size = min(app.width, app.height) - 100
         cell_size = map_size / app.map_blocks
@@ -31,7 +36,7 @@ def redrawAll(app, canvas):
             for j in range(MAP_BLOCKS):
                 curr_block = app.map.getMap()[j][i]
                 if isinstance(curr_block, Barrier):
-                    cx, cy = getCXY(app, i, j)
+                    cx, cy = getMapCXY(app, i, j)
                     canvas.create_rectangle(cx - cell_size / 2, cy - cell_size / 2,
                                             cx + cell_size / 2, cy + cell_size / 2,
                                             width=1, fill=B_TYPE[curr_block.getBType()][-1])
@@ -62,20 +67,75 @@ def redrawAll(app, canvas):
                                 width=6, fill=None)
 
         # Show the HP
-        canvas.create_text(map_start_x + 50, map_start_y - 50, text=f"HP: {app.player.getHP()}",
+        cx, cy = getCXY(app, 30, 92)
+        canvas.create_text(cx, cy, text=f"HP: {app.player.getHP()}",
                            fill='black', font='Helvetica 15 bold')
 
         # Show the Score
-        canvas.create_text(map_start_x + 200, map_start_y - 50, text=f"Score: {app.score}",
+        cx, cy = getCXY(app, 50, 92)
+        canvas.create_text(cx, cy, text=f"Score: {app.score}",
                            fill='black', font='Helvetica 15 bold')
 
         # Show the Ammo
-        canvas.create_text(map_start_x + 500, map_start_y - 50, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
+        cx, cy = getCXY(app, 70, 92)
+        canvas.create_text(cx, cy, text=f"{app.player.curr_gun}: {app.player.curr_ammo}",
                            fill='black', font='Helvetica 15 bold')
 
         if app.is_game_over:
             canvas.create_text(map_start_x + 100, map_start_y - 50, text="GAME OVER!",
                                fill='red', font='Helvetica 15 bold')
+
+        if app.pause:
+            cx, cy = getCXY(app, 50, 65)
+            canvas.create_text(cx, cy, text="Pause",
+                               fill='red', font='Helvetica 25 bold')
+
+            cx, cy = getCXY(app, 50, 60)
+            canvas.create_text(cx, cy, text="Press any to continue",
+                               fill='black', font='Helvetica 15 bold')
+
+            for b in app.buttons:
+                b.draw(app, canvas)
+
+    elif app.UI == "Over":
+        canvas.create_rectangle(0, 0, app.width, app.height, fill='#969285')
+
+        cx, cy = getCXY(app, 50, 65)
+        canvas.create_text(cx, cy, text="GAME OVER",
+                           fill='red', font='Helvetica 25 bold')
+
+        cx, cy = getCXY(app, 50, 60)
+        canvas.create_text(cx, cy, text=f"Your Score is: {app.score}",
+                           fill='black', font='Helvetica 15 bold')
+
+        for b in app.buttons:
+            b.draw(app, canvas)
+
+    elif app.UI == "Help":
+        text = "In the menu, click button Start for starting the game;\n"\
+                "Click button Help for some help with the game.\n"\
+                "In the game, press Esc for pausing the game.\n"\
+                "Press Up to face up;\n"\
+                "Press Down to face down;\n"\
+                "Press Left to face left;\n"\
+                "Press Right to face right.\n"\
+                "Press w to move up;\n"\
+                "Press s to move down;\n"\
+                "Press a to move left;\n"\
+                "Press d to move right.\n"\
+                "Press 1 to change to pistol;\n"\
+                "Press 2 to change to submachine gun;\n"\
+                "Press 3 to change to sniper gun.\n"\
+                "Press e to put a box;\n"\
+                "Press q to put an oil drum.\n"\
+                "Press Space to shoot;" \
+
+        cx, cy = getCXY(app, 50, 50)
+        canvas.create_rectangle(0, 0, app.width, app.height, fill='#E2D9B8')
+        canvas.create_text(cx, cy, text=text,
+                           fill='black', font='Helvetica 15 bold')
+        for b in app.buttons:
+            b.draw(app, canvas)
 
     else:
         pass

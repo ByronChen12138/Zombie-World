@@ -10,7 +10,20 @@ def getDistance(x1, y1, x2, y2):
 
 def getCXY(app, x, y):
     """
-    Get the (cx, cy) on the canvas (map) according to relative x, y
+    Get the (cx, cy) on the Canvas according to relative x, y
+    :param app: Current app object
+    :param x: Relative x
+    :param y: Relative y
+    :return: Tuple of the (cx,cy) on the canvas
+    """
+    cell_width = app.width / 100
+    cell_height = app.height / 100
+    return x * cell_width, (100 - y) * cell_height
+
+
+def getMapCXY(app, x, y):
+    """
+    Get the (cx, cy) on the MAP according to relative x, y
     :param app: Current app object
     :param x: Relative x
     :param y: Relative y
@@ -44,7 +57,7 @@ def isCirclePositionLegal(app, x, y, size):
     map_end_x = map_start_x + map_size
     map_end_y = map_start_y + map_size
     drawing_size = size * cell_size / 2
-    cx, cy = getCXY(app, x, y)
+    cx, cy = getMapCXY(app, x, y)
 
     barrier = app.map.anyBarrier(x, y, size)
 
@@ -127,10 +140,10 @@ def isTouch(app, cell_size, obj1, obj2):
         threshold = (3 + obj2.size) * cell_size / 2
 
     x, y = obj1.getPosition()
-    cx1, cy1 = getCXY(app, x, y)
+    cx1, cy1 = getMapCXY(app, x, y)
 
     x, y = obj2.getPosition()
-    cx2, cy2 = getCXY(app, x, y)
+    cx2, cy2 = getMapCXY(app, x, y)
 
     if getDistance(cx1, cy1, cx2, cy2) <= threshold:
         return True

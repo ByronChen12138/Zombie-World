@@ -21,7 +21,7 @@ class DrawingObject:
 
     def drawObject(self, app, canvas, cell_size):
         drawing_size = self.size * cell_size
-        cx, cy = getCXY(app, self.x, self.y)
+        cx, cy = getMapCXY(app, self.x, self.y)
 
         if self.shape == "Circle":
             drawing_size /= 2

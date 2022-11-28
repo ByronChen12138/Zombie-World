@@ -73,6 +73,7 @@ class Zombie(Character):
         :param app: current app
         :return: None
         """
+        # TODO: do the dfs direction finding
 
     def move(self, app):
         if self.move_type == "Random":
