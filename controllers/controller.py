@@ -6,9 +6,6 @@ from utils.cmu_112_graphics import *
 from utils.utils import *
 
 
-# TODO: All the Random obj should check the barrier
-
-
 def mousePressed(app, event):
     """
     Activate when the mouse is click on the canvas when running the app.
@@ -145,6 +142,9 @@ def timerFired(app):
         # Update new zombie if needed
         while len(app.zombies) < app.zombie_num:
             x, y, direction, z_type = roll_a_zombie(app)
+            if not app.has_speed:
+                app.has_speed = True
+                z_type = "Speed"
             app.zombies.add(Zombie(x, y, direction, z_type))
 
         # Update all the cold time
@@ -174,6 +174,8 @@ def timerFired(app):
         for z in copy.copy(app.zombies):
             if z.getHP() <= 0:
                 app.score += z.getScore()
+                if z.z_type == "Speed":
+                    app.has_speed = False
                 app.zombies.remove(z)
 
         # Zombie move

@@ -50,21 +50,12 @@ def isCirclePositionLegal(app, x, y, size):
     :param size: The size of the current circle
     :return: (True, None) if legal, (False, barrier) if illegal; barrier is the one on the way
     """
-    map_size = min(app.width, app.height) - 100
-    cell_size = map_size / app.map_blocks
-    map_start_x = (app.width - map_size) / 2
-    map_start_y = app.height - map_size - 10
-    map_end_x = map_start_x + map_size
-    map_end_y = map_start_y + map_size
-    drawing_size = size * cell_size / 2
-    cx, cy = getMapCXY(app, x, y)
-
     barrier = app.map.anyBarrier(x, y, size)
 
-    if map_start_x <= cx - drawing_size and \
-            cx + drawing_size <= map_end_x and \
-            map_start_y <= cy - drawing_size and \
-            cy + drawing_size <= map_end_y and \
+    if 0 < x - size // 2 and \
+            x + size // 2 < MAP_BLOCKS and \
+            0 < y - size // 2 and \
+            y + size // 2 < MAP_BLOCKS and \
             barrier is None:
         return True, None
     return False, barrier
