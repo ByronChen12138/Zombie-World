@@ -37,11 +37,15 @@ Press <code>q</code> to put an oil drum.
 
 Press <code>Space</code> to shoot;
 
-
-
 ***
 
-## Scope of Project
+## Some Features
+
+In this game, the submachine gun is given with deceleration, which has limited range of shooting
+
+In this game, the speed zombie (in blue) is given with DFS path finding moving method but would only be used when the 
+player is close enough. Due to the lack of comuputer, the best depth of dfs is set to 8 which will help the zombie find
+the way only with the half part of one barrier.
 
 
 ***
@@ -50,13 +54,25 @@ Press <code>Space</code> to shoot;
 
 ```console
 .
-├── 
+├── controllers
+    └── controller.py
+├── models
+    ├── app.py
+    ├── Barrier.py
+    ├── Bullet.py
+    ├── Character.py
+    ├── DrawingObject.py
+    ├── Gun.py
+    ├── Map.py
+    ├── MyButton.py
+    ├── Player.py
+    └── Zombie.py
+├── utils
+    ├── cmu_112_graphics.py
+    └── utils.py
+├── views
+    └── view.py
+├── database.py
 ├── README.md
-├── 
-    ├── 
-    └── 
-├── 
-└── 
-    ├── 
-    └── 
+└── runZombieWorld.py
 ```
