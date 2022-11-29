@@ -25,15 +25,15 @@ def redrawAll(app, canvas):
     elif app.UI == "Game":
         # Variables needed to be updated
         map_size = min(app.width, app.height) - 100
-        cell_size = map_size / app.map_blocks
+        cell_size = map_size / app.blocks_to_draw
         map_start_x = (app.width - map_size) / 2
         map_start_y = app.height - map_size - 10
 
         # Draw Map
         canvas.create_rectangle(map_start_x, map_start_y, map_start_x + map_size, map_start_y + map_size,
                                 width=6, fill='#C9A946')
-        for i in range(MAP_BLOCKS):
-            for j in range(MAP_BLOCKS):
+        for i in range(app.x_offset, app.x_offset + app.blocks_to_draw):
+            for j in range(app.y_offset, app.y_offset + app.blocks_to_draw):
                 curr_block = app.map.getMap()[j][i]
                 if isinstance(curr_block, Barrier):
                     cx, cy = getMapCXY(app, i, j)

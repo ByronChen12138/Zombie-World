@@ -12,6 +12,10 @@ class Map(DrawingObject):
         self.type = "Map"
 
     def __str__(self):
+        """
+        Good for debugging
+        :return: str of all the map
+        """
         # Citation: https://stackoverflow.com/questions/13214809/pretty-print-2d-list
         return '\n'.join(['\t'.join([str(cell) for cell in row]) for row in self.map])
 

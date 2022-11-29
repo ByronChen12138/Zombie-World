@@ -39,6 +39,7 @@ class Zombie(Character):
         index = random.randint(0, 7)
         self.direction = DIRECTIONS[DIRECTIONS_LIST[index]]
 
+    # TODO: Can be more smart, not only one possible direction
     def moveDirect(self, app):
         """
         Upd the direction for the next move directly to the player

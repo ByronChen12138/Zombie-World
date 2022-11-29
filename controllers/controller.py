@@ -125,9 +125,9 @@ def timerFired(app):
 
         # Update difficulty
         if 100 < app.score <= 300:
-            app.zombie_num = 20
+            app.zombie_num = 25
         elif 300 < app.score:
-            app.zombie_num = 30
+            app.zombie_num = 35
 
         # Update new gun if can
         if app.gun_time <= 0 and len(app.guns) < 5:
@@ -141,9 +141,11 @@ def timerFired(app):
         # Update new zombie if needed
         while len(app.zombies) < app.zombie_num:
             x, y, direction, z_type = roll_a_zombie(app)
-            if not app.has_speed:
-                app.has_speed = True
+            while app.speed_num < SPEED_NUM:
+                app.speed_num += 1
                 z_type = "Speed"
+                app.zombies.add(Zombie(x, y, direction, z_type))
+                x, y, direction, z_type = roll_a_zombie(app)
             app.zombies.add(Zombie(x, y, direction, z_type))
 
         # Update all the cold time
@@ -174,7 +176,7 @@ def timerFired(app):
             if z.getHP() <= 0:
                 app.score += z.getScore()
                 if z.z_type == "Speed":
-                    app.has_speed = False
+                    app.speed_num -= 1
                 app.zombies.remove(z)
 
         # Zombie move
@@ -186,4 +188,3 @@ def timerFired(app):
         for b in copy.copy(app.player.bullets):
             if not b.move(app):
                 app.player.bullets.remove(b)
-

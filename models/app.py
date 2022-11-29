@@ -16,6 +16,7 @@ def appStarted(app):
     app.zombie_num = ZOMBIE_NUM
     app.gun_time = 50
     app.map_blocks = MAP_BLOCKS
+    app.blocks_to_draw = BLOCKS_TO_DRAW
     app.player = Player()
     app.map = Map(400, 400, 10, app.player)
     app.UI = "Menu"
@@ -23,11 +24,15 @@ def appStarted(app):
     app.buttons = set()
     app.pause = False
 
-    app.has_speed = True
-    app.zombies = set()
-    # Must be one speed zombie
-    x, y, direction, z_type = roll_a_zombie(app)
-    app.zombies.add(Zombie(x, y, direction, "Speed"))
+    app.x_offset = 50
+    app.y_offset = 50
+
+    # Must have some speed zombies
+    app.speed_num = SPEED_NUM
+    for i in range(app.speed_num):
+        app.zombies = set()
+        x, y, direction, z_type = roll_a_zombie(app)
+        app.zombies.add(Zombie(x, y, direction, "Speed"))
 
     for i in range(app.zombie_num - 1):
         x, y, direction, z_type = roll_a_zombie(app)

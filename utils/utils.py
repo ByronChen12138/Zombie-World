@@ -33,10 +33,10 @@ def getMapCXY(app, x, y):
     map_size = min(app.width, app.height) - 100
     map_start_x = (app.width - map_size) / 2
     map_start_y = app.height - map_size - 10
-    cell_size = map_size / app.map_blocks
+    cell_size = map_size / app.blocks_to_draw
 
-    cx = map_start_x + x * cell_size
-    cy = map_start_y + y * cell_size
+    cx = map_start_x + (x - app.x_offset) * cell_size
+    cy = map_start_y + (y - app.y_offset) * cell_size
 
     return cx, cy
 
@@ -148,7 +148,7 @@ def doAttacksToPlayer(app):
     :return: If any attack, return True; else False
     """
     map_size = min(app.width, app.height) - 100
-    cell_size = map_size / app.map_blocks
+    cell_size = map_size / app.blocks_to_draw
     is_attacked = False
 
     for zombie in app.zombies:
@@ -166,7 +166,7 @@ def doAttacksToZombies(app):
     :return: If any attack, return True; else False
     """
     map_size = min(app.width, app.height) - 100
-    cell_size = map_size / app.map_blocks
+    cell_size = map_size / app.blocks_to_draw
     is_attacked = False
 
     for zombie in app.zombies:
@@ -203,7 +203,7 @@ def pickGun(app):
     :return: If any pickup, return True; else False
     """
     map_size = min(app.width, app.height) - 100
-    cell_size = map_size / app.map_blocks
+    cell_size = map_size / app.blocks_to_draw
     is_picked = False
 
     for g in copy.copy(app.guns):
