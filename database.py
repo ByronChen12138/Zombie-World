@@ -6,6 +6,8 @@ ZOMBIE_LEGAL_DIS = 25
 INVINCIBLE_TIME = 11
 GUN_LEGAL_DIS = 10
 NUM_OF_WALL = 10
+DFS_DEPTH = 9
+DFS_DISTANCE = 8
 
 DIRECTIONS = {"Up": (0, 1),
               "Down": (0, -1),
