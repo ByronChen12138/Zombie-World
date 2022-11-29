@@ -1,7 +1,6 @@
 from models.Bullet import Bullet
 from utils.utils import *
 from models.Character import Character
-from models.Gun import Gun
 
 
 class Player(Character):

@@ -2,7 +2,6 @@ from models.Gun import Gun
 from models.MyButton import MyButton
 from models.Zombie import Zombie
 from models.app import appStarted
-from utils.cmu_112_graphics import *
 from utils.utils import *
 
 
