@@ -13,6 +13,8 @@ For running the game, you just need to open the file "runZombieWorld.py", and ru
 ***
 
 ## User Manual
+The smallest window size for this game is 900 x 600, please play this game with the window size no less than this value.
+
 In the menu, click button <code>Start</code> for starting the game;
 Click button <code>Help</code> for some help with the game.
 
