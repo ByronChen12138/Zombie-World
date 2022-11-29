@@ -191,9 +191,10 @@ def doTimeUpd(app):
     for z in app.zombies:
         z.move_time -= 1
     app.gun_time -= 1
-    # for b in app.player.bullets:
-    #     if b.acceleration > 1:
-    #         b.acceleration -= 1
+    for b in copy.copy(app.player.bullets):
+        b.deceleration()
+        if b.speed <= 0:
+            app.player.bullets.remove(b)
 
 
 def pickGun(app):

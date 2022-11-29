@@ -5,7 +5,7 @@ from models.Character import Character
 
 class Player(Character):
     def __init__(self):
-        size, ammo, heat_rate, color, damage, speed, appear_rate = G_TYPE["Pistol"]
+        size, ammo, heat_rate, color, damage, speed, acceleration, appear_rate = G_TYPE["Pistol"]
         super().__init__(MAP_BLOCKS // 2, MAP_BLOCKS // 2, 3, DIRECTIONS["Up"], "black", 100, 0, damage, appear_rate)
         self.guns = {"Pistol": ammo, "Submachine": 0, "Sniper": 0}
         self.curr_gun = "Pistol"
@@ -36,9 +36,9 @@ class Player(Character):
         self.shoot_time = 0
 
     def shoot(self):
-        size, ammo, heat_rate, color, damage, speed, appear_rate = G_TYPE[self.curr_gun]
+        size, ammo, heat_rate, color, damage, speed, acceleration, appear_rate = G_TYPE[self.curr_gun]
         if self.guns[self.curr_gun] > 0:
-            self.bullets.append(Bullet(self.x, self.y, self.direction, color, damage, speed))
+            self.bullets.append(Bullet(self.x, self.y, self.direction, color, damage, speed, acceleration))
             self.shoot_time = heat_rate
             self.guns[self.curr_gun] -= 1
             self.curr_ammo = self.guns[self.curr_gun]
