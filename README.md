@@ -23,17 +23,17 @@ Press <code>Down</code> to face down;
 Press <code>Left</code> to face left;
 Press <code>Right</code> to face right.
 
-Press <code>w</code> to move up;
-Press <code>s</code> to move down;
-Press <code>a</code> to move left;
-Press <code>d</code> to move right.
+Press <code>W</code> to move up;
+Press <code>S</code> to move down;
+Press <code>A</code> to move left;
+Press <code>D</code> to move right.
 
 Press <code>1</code> to change to pistol;
 Press <code>2</code> to change to submachine gun;
 Press <code>3</code> to change to sniper gun.
 
-Press <code>e</code> to put a box;
-Press <code>q</code> to put an oil drum.
+Press <code>E</code> to put a box;
+Press <code>Q</code> to put an oil drum.
 
 Press <code>Space</code> to shoot;
 
