@@ -12,6 +12,7 @@ DFS_DISTANCE = 8
 SPEED_NUM = 4
 SCROLL_PIX = 10
 SCROLL_RANGE = 5
+GUN_NUM = 15
 
 DIRECTIONS = {"Up": (0, 1),
               "Down": (0, -1),
@@ -33,7 +34,7 @@ Z_TYPE_LIST = ["Normal", "Speed", "Tank"]
 # Size, Ammo, Heat Rate, Color, Damage, Speed, Acceleration, Appear Rate
 G_TYPE = {
     "Pistol": [3, math.inf, 2, "yellow", 10, 2, 0, 0],
-    "Submachine": [3, 60, 1, "#9F5A5A", 20, 2, 0, 60],
+    "Submachine": [3, 60, 1, "#9F5A5A", 20, 3, 1, 60],
     "Sniper": [3, 8, 5, "#7F9591", 100, 2, 0, 40]
 }
 G_TYPE_LIST = ["Pistol", "Submachine", "Sniper"]

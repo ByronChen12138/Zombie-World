@@ -9,6 +9,7 @@ class Bullet(DrawingObject):
         self.damage = damage
         self.speed = speed
         self.acceleration = acceleration
+        self.dece_time = 10
 
     def __str__(self):
         return f"({self.x}, {self.y})"

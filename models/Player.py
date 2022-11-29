@@ -7,7 +7,7 @@ class Player(Character):
     def __init__(self):
         size, ammo, heat_rate, color, damage, speed, acceleration, appear_rate = G_TYPE["Pistol"]
         super().__init__(MAP_BLOCKS // 2, MAP_BLOCKS // 2, 3, DIRECTIONS["Up"], "black", 100, 0, damage, appear_rate)
-        self.guns = {"Pistol": ammo, "Submachine": 0, "Sniper": 0}
+        self.guns = {"Pistol": ammo, "Submachine": ammo, "Sniper": 0}
         self.curr_gun = "Pistol"
         self.curr_ammo = self.guns[self.curr_gun]
         self.barriers = {"Box": 80, "OD": 30}

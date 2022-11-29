@@ -192,9 +192,12 @@ def doTimeUpd(app):
         z.move_time -= 1
     app.gun_time -= 1
     for b in copy.copy(app.player.bullets):
-        b.deceleration()
-        if b.speed <= 0:
-            app.player.bullets.remove(b)
+        b.dece_time -= 1
+        if b.dece_time <= 0:
+            b.dece_time = 10
+            b.deceleration()
+            if b.speed <= 0:
+                app.player.bullets.remove(b)
 
 
 def pickGun(app):

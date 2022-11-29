@@ -133,7 +133,7 @@ def timerFired(app):
         doScroll(app)
 
         # Update new gun if can
-        if app.gun_time <= 0 and len(app.guns) < 5:
+        if app.gun_time <= 0 and len(app.guns) < GUN_NUM:
             x, y, g_type = roll_a_gun(app)
             app.guns.add(Gun(x, y, g_type))
             app.gun_time = 50
