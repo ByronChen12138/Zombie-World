@@ -125,9 +125,12 @@ def timerFired(app):
 
         # Update difficulty
         if 100 < app.score <= 300:
-            app.zombie_num = 25
+            app.zombie_num = 30
         elif 300 < app.score:
-            app.zombie_num = 35
+            app.zombie_num = 40
+
+        # doScroll
+        doScroll(app)
 
         # Update new gun if can
         if app.gun_time <= 0 and len(app.guns) < 5:

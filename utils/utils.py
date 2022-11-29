@@ -213,3 +213,21 @@ def pickGun(app):
             is_picked = True
 
     return is_picked
+
+
+def doScroll(app):
+    # Scroll Left
+    if app.x_offset >= app.player.x - SCROLL_RANGE:
+        app.x_offset = max(0, app.x_offset - SCROLL_PIX)
+
+    # Scroll Right
+    elif app.x_offset + BLOCKS_TO_DRAW <= app.player.x + SCROLL_RANGE:
+        app.x_offset = min(app.x_offset + SCROLL_PIX, MAP_BLOCKS // 2)
+
+    # Scroll Down
+    if app.y_offset >= app.player.y - SCROLL_RANGE:
+        app.y_offset = max(0, app.y_offset - SCROLL_PIX)
+
+    # Scroll Up
+    elif app.y_offset + BLOCKS_TO_DRAW <= app.player.y + SCROLL_RANGE:
+        app.y_offset = min(app.y_offset + SCROLL_PIX, MAP_BLOCKS // 2)
