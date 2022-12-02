@@ -15,18 +15,22 @@ def mousePressed(app, event):
     for b in app.buttons:
         if b.isClick(event.x, event.y):
             if b.text == "Start":
+                app.SOUND_BUTTON_ENTER.start()
                 app.page_set = False
                 app.UI = "Game"
 
             elif b.text == "Help":
+                app.SOUND_BUTTON_ENTER.start()
                 app.page_set = False
                 app.UI = "Help"
 
             elif b.text == "Back":
+                app.SOUND_BUTTON_QUIT.start()
                 app.page_set = False
                 app.UI = "Menu"
 
             elif b.text == "Quit":
+                app.SOUND_BUTTON_QUIT.start()
                 app.page_set = False
                 app.UI = "Menu"
                 appStarted(app)
@@ -57,17 +61,17 @@ def keyPressed(app, event):
             if event.key != "Up" and app.player.move_time <= 0:
                 app.player.move(app)
 
-        if event.key == "Down" or event.key == "s" or event.key == "S":
+        elif event.key == "Down" or event.key == "s" or event.key == "S":
             app.player.direction = DIRECTIONS["Down"]
             if event.key != "Down" and app.player.move_time <= 0:
                 app.player.move(app)
 
-        if event.key == "Left" or event.key == "a" or event.key == "A":
+        elif event.key == "Left" or event.key == "a" or event.key == "A":
             app.player.direction = DIRECTIONS["Left"]
             if event.key != "Left" and app.player.move_time <= 0:
                 app.player.move(app)
 
-        if event.key == "Right" or event.key == "d" or event.key == "D":
+        elif event.key == "Right" or event.key == "d" or event.key == "D":
             app.player.direction = DIRECTIONS["Right"]
             if event.key != "Right" and app.player.move_time <= 0:
                 app.player.move(app)

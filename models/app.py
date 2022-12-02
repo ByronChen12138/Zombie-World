@@ -1,5 +1,8 @@
+import pygame
+
 from models.Map import Map
 from models.Player import Player
+from models.Sound import Sound
 from models.Zombie import Zombie
 from utils.utils import *
 
@@ -11,6 +14,8 @@ def appStarted(app):
     :return: None
     """
     # app.timerDelay = 1
+    pygame.init()
+
     app.is_game_over = False
     app.score = 0
     app.zombie_num = ZOMBIE_NUM
@@ -42,6 +47,9 @@ def appStarted(app):
 
     app.guns = set()
 
+    # Create Sounds
+    app.SOUND_BUTTON_ENTER = Sound("../sounds/button_enter.mp3")
+    app.SOUND_BUTTON_QUIT = Sound("../sounds/button_quit.mp3")
 
 
 

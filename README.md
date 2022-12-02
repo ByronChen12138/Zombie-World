@@ -49,8 +49,32 @@ In this game, the speed zombie (in blue) is given with DFS path finding moving m
 player is close enough. Due to the lack of comuputer, the best depth of dfs is set to 8 which will help the zombie find
 the way only with the half part of one barrier.
 
-
 ***
+## Citation
+
+In this project, several additional files are used and the sources are listed below:
+
+**PACKAGE:**
+
+<code>cmu_112_graphics.py</code> CMU EDU
+
+<code>pygame</code> https://www.pygame.org/news
+
+**SOUND:**
+
+<code>Sound Class</code> https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#playingSoundsWithPygame
+
+<code>button_enter.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
+
+<code>button_quit.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
+
+<code></code>
+
+<code></code>
+
+<code></code>
+***
+
 
 ## Project Structure
 
