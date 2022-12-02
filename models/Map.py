@@ -91,6 +91,6 @@ class Map(DrawingObject):
         for i in range(obj.x - 1 - r, obj.x + 2 + r):
             for j in range(obj.y - 1 - r, obj.y + 2 + r):
                 if 0 <= i <= MAP_BLOCKS - 1 and 0 <= j <= MAP_BLOCKS - 1:
-                    if self.map[j][i] is not None:
+                    if self.map[j][i] is not None and self.map[j][i] != obj:
                         ans.add(self.map[j][i])
         return ans

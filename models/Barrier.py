@@ -32,6 +32,6 @@ class Barrier(DrawingObject):
                 obj.HP -= 200
 
     def isBroken(self, app):
-        if self.b_type == "OD":
+        if self.b_type == "OD" and self.HP <= 0:
             self.doDamage(app)
         return self.HP <= 0
