@@ -49,6 +49,41 @@ In this game, the speed zombie (in blue) is given with DFS path finding moving m
 player is close enough. Due to the lack of comuputer, the best depth of dfs is set to 8 which will help the zombie find
 the way only with the half part of one barrier.
 
+## Project Structure
+
+```console
+.
+├── controllers
+    └── controller.py
+├── models
+    ├── app.py
+    ├── Barrier.py
+    ├── Bullet.py
+    ├── Character.py
+    ├── DrawingObject.py
+    ├── Gun.py
+    ├── Map.py
+    ├── MyButton.py
+    ├── Player.py
+    └── Zombie.py
+├── sounds
+    ├── button_enter.mp3
+    ├── button_quit.mp3
+    ├── OD.wav
+    ├── player_hurt.wav
+    ├── player_hurt2.wav
+    ├── player_hurt3.wav
+    └── zombie_hurt.wav
+├── utils
+    ├── cmu_112_graphics.py
+    └── utils.py
+├── views
+    └── view.py
+├── database.py
+├── README.md
+└── runZombieWorld.py
+```
+
 ***
 ## Citation
 
@@ -68,37 +103,15 @@ In this project, several additional files are used and the sources are listed be
 
 <code>button_quit.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
 
-<code></code> https://mixkit.co/
+<code>OD.wav</code> https://mixkit.co/
 
-<code></code>
+<code>player_hurt.wav</code> https://mixkit.co/
+
+<code>player_hurt2.wav</code> https://mixkit.co/
+
+<code>player_hurt3.wav</code> https://mixkit.co/
+
+<code>zombie_hurt.wav</code> https://mixkit.co/
 
 <code></code>
 ***
-
-
-## Project Structure
-
-```console
-.
-├── controllers
-    └── controller.py
-├── models
-    ├── app.py
-    ├── Barrier.py
-    ├── Bullet.py
-    ├── Character.py
-    ├── DrawingObject.py
-    ├── Gun.py
-    ├── Map.py
-    ├── MyButton.py
-    ├── Player.py
-    └── Zombie.py
-├── utils
-    ├── cmu_112_graphics.py
-    └── utils.py
-├── views
-    └── view.py
-├── database.py
-├── README.md
-└── runZombieWorld.py
-```
