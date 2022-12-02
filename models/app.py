@@ -48,8 +48,14 @@ def appStarted(app):
     app.guns = set()
 
     # Create Sounds
-    app.SOUND_BUTTON_ENTER = Sound("../sounds/button_enter.mp3")
-    app.SOUND_BUTTON_QUIT = Sound("../sounds/button_quit.mp3")
+    app.SOUND_BUTTON_QUIT = Sound("./sounds/button_quit.mp3")
+    app.SOUND_BUTTON_ENTER = Sound("./sounds/button_enter.mp3")
+    app.SOUND_PLAYER_HURT1 = Sound("./sounds/player_hurt.wav")
+    app.SOUND_PLAYER_HURT2 = Sound("./sounds/player_hurt2.wav")
+    app.SOUND_PLAYER_HURT3 = Sound("./sounds/player_hurt3.wav")
+    app.SOUND_ZOMBIE_HURT = Sound("./sounds/zombie_hurt.wav")
+    app.SOUND_OD = Sound("./sounds/OD.wav")
+
 
 
 

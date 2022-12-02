@@ -161,6 +161,7 @@ def timerFired(app):
         # Reset invincible time once the player is attacked
         if app.player.invincible_time <= 0:
             if doAttacksToPlayer(app):
+                playerHurtSound(app)
                 app.player.invincible_time = INVINCIBLE_TIME
                 app.player.color = "#DB1EF1"
             else:
@@ -185,6 +186,8 @@ def timerFired(app):
                 if z.z_type == "Speed":
                     app.speed_num -= 1
                 app.zombies.remove(z)
+                if not app.SOUND_ZOMBIE_HURT.isPlaying():
+                    app.SOUND_ZOMBIE_HURT.start()
 
         # Zombie move
         for z in app.zombies:

@@ -22,16 +22,19 @@ class Barrier(DrawingObject):
     def doDamage(self, app):
         objs = app.map.getSurroundings(self, 5)
         for obj in objs:
-            if obj.type == "Player":
+            if obj.type == "Player" and app.player.invincible_time <= 0:
+                app.player.invincible_time = INVINCIBLE_TIME
+                app.player.color = "#DB1EF1"
                 obj.HP -= 20
             elif isinstance(obj, Barrier):
                 app.map.removeAnObj(obj)
                 if obj.b_type == "OD":
                     obj.doDamage(app)
-            else:
+            elif obj.type != "Player":
                 obj.HP -= 200
 
     def isBroken(self, app):
         if self.b_type == "OD" and self.HP <= 0:
+            app.SOUND_OD.start()
             self.doDamage(app)
         return self.HP <= 0

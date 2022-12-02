@@ -235,3 +235,13 @@ def doScroll(app):
     # Scroll Up
     elif app.y_offset + BLOCKS_TO_DRAW <= app.player.y + SCROLL_RANGE:
         app.y_offset = min(app.y_offset + SCROLL_PIX, MAP_BLOCKS // 2)
+
+
+def playerHurtSound(app):
+    index = random.randint(1, 3)
+    if index == 1:
+        app.SOUND_PLAYER_HURT1.start()
+    if index == 2:
+        app.SOUND_PLAYER_HURT2.start()
+    if index == 3:
+        app.SOUND_PLAYER_HURT3.start()
