@@ -16,7 +16,11 @@ def redrawAll(app, canvas):
 
     if app.UI == "Menu":
         cx, cy = getCXY(app, 50, 80)
-        canvas.create_rectangle(0, 0, app.width,app.height, fill='#E2D9B8')
+        canvas.create_rectangle(0, 0, app.width, app.height, fill='#E2D9B8')
+
+        # Citation: https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#imageMethods
+        canvas.create_image(app.width//2, app.height//2, image=ImageTk.PhotoImage(app.IMAGE_START))
+
         canvas.create_text(cx, cy, text="ZOMBIE WORLD",
                            fill='black', font='Helvetica 25 bold')
         for b in app.buttons:
@@ -114,9 +118,12 @@ def redrawAll(app, canvas):
         canvas.create_text(cx, cy, text="GAME OVER",
                            fill='red', font='Helvetica 25 bold')
 
-        cx, cy = getCXY(app, 50, 60)
-        canvas.create_text(cx, cy, text=f"Your Score is: {app.score}",
-                           fill='black', font='Helvetica 15 bold')
+        # Citation: https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#imageMethods
+        canvas.create_image(app.width // 2, app.height // 2, image=ImageTk.PhotoImage(app.IMAGE_GAME_OVER_SENSE))
+        canvas.create_image(app.width // 2, app.height // 3, image=ImageTk.PhotoImage(app.IMAGE_GAME_OVER))
+
+        canvas.create_text(app.width // 2, 4 * app.height // 5, text=f"Your Score is: {app.score}",
+                           fill='red', font='Helvetica 30 bold')
 
         for b in app.buttons:
             b.draw(app, canvas)
@@ -142,6 +149,10 @@ def redrawAll(app, canvas):
 
         cx, cy = getCXY(app, 50, 50)
         canvas.create_rectangle(0, 0, app.width, app.height, fill='#E2D9B8')
+
+        # Citation: https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#imageMethods
+        canvas.create_image(app.width // 2, app.height // 2, image=ImageTk.PhotoImage(app.IMAGE_START))
+
         canvas.create_text(cx, cy, text=text,
                            fill='black', font='Helvetica 15 bold')
         for b in app.buttons:

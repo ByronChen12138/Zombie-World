@@ -64,5 +64,13 @@ def appStarted(app):
     # Create Music
     app.MUSIC_STARTING = Music("./sounds/starting.flac")
     app.MUSIC_ENDING = Music("./sounds/Ending.mp3")
-
     app.MUSIC_STARTING.start(-1)
+
+    # Create Images
+    # Citation: https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#imageMethods
+    app.IMAGE_START = app.loadImage("./images/Start.jpg")
+    app.IMAGE_GAME_OVER = app.loadImage("./images/Game Over.png")
+    app.IMAGE_GAME_OVER = app.scaleImage(app.IMAGE_GAME_OVER, 3/5)
+
+    app.IMAGE_GAME_OVER_SENSE = app.loadImage("./images/Game Over Sense.png")
+    app.IMAGE_GAME_OVER_SENSE = app.scaleImage(app.IMAGE_GAME_OVER_SENSE, 1.6)

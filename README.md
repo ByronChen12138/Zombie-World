@@ -57,6 +57,10 @@ the way only with the half part of one barrier.
 .
 ├── controllers
     └── controller.py
+├── images
+    ├── Game Over.png
+    ├── Game Over Sense.png
+    └── Start.jpg
 ├── models
     ├── app.py
     ├── Barrier.py
@@ -106,6 +110,14 @@ In this project, several additional files are used and the sources are listed be
 <code>cmu_112_graphics.py</code> CMU EDU
 
 <code>pygame</code> https://www.pygame.org/news
+
+**IMAGE:**
+
+<code>Game Over.png</code> https://pngtree.com/element/down?id=NjAyNjI1Mg==&type=1&time=1670279324&token=MzYzNmY5YWMyNmE5MTQxNmMwMDNlNTQ1NjAyOTY3OWU=
+
+<code>Game Over Sense.png</code> https://www.freepik.com/premium-photo/zombie-hands-rising-dark-halloween-night_9026376.htm#query=zombie%20hand&position=25&from_view=keyword
+
+<code>Start.jpg</code> https://www.iamag.co/speed-painting-weekly-selection-4/steve-jung-zombie-town/
 
 **SOUND:**
 

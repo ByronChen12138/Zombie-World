@@ -186,7 +186,7 @@ def timerFired(app):
             app.UI = "Over"
             app.is_game_over = True
             app.buttons = set()
-            app.buttons.add(MyButton(app, 50, 50, 4, "#969285", "Quit"))
+            app.buttons.add(MyButton(app, 90, 90, 4, "#969285", "Quit"))
             app.page_set = True
             app.MUSIC_ENDING.start()
             return
