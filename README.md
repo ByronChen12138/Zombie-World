@@ -5,7 +5,9 @@ Welcome to the game Zombie World!
 ***
 
 ## How to Run this Game?
-Before running this game, you need to install python on your computer and have all the files downloaded in a new directory. 
+Before running this game, you need to install python and some packages on your computer and have all the files downloaded in a new directory. 
+To help you install the packages, please run the file <code>beforeRunningGame.py</code> first, and this will print out
+all the commands you need to run on the cmd for installing the packages.
 To help you check if the completeness of your download, the whole structure of this game is shown in the Section: **Project Structure**. 
 After installed all the things correctly, you can finally play this game! 
 For running the game, you just need to open the file "runZombieWorld.py", and run it in any IDE.
@@ -63,22 +65,32 @@ the way only with the half part of one barrier.
     ├── DrawingObject.py
     ├── Gun.py
     ├── Map.py
+    ├── Music.py
     ├── MyButton.py
     ├── Player.py
+    ├── Sound.py
     └── Zombie.py
 ├── sounds
+    ├── bit gun.wav
     ├── button_enter.mp3
     ├── button_quit.mp3
+    ├── Ending.mp3
+    ├── Gun Pick.wav
     ├── OD.wav
+    ├── pistol.mp3
     ├── player_hurt.wav
     ├── player_hurt2.wav
     ├── player_hurt3.wav
+    ├── Sniper.mp3
+    ├── starting.flac
+    ├── Submachine.mp3
     └── zombie_hurt.wav
 ├── utils
     ├── cmu_112_graphics.py
     └── utils.py
 ├── views
     └── view.py
+├── beforeRunningGame
 ├── database.py
 ├── README.md
 └── runZombieWorld.py
@@ -99,6 +111,8 @@ In this project, several additional files are used and the sources are listed be
 
 <code>Sound Class</code> https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#playingSoundsWithPygame
 
+<code>Music Class</code> https://www.cs.cmu.edu/~112/notes/notes-animations-part4.html#playingSoundsWithPygame
+
 <code>button_enter.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
 
 <code>button_quit.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
@@ -106,6 +120,8 @@ In this project, several additional files are used and the sources are listed be
 <code>Ending.mp3</code> https://sc.chinaz.com/yinxiao/?classid=&keyword=%E5%83%B5%E5%B0%B8
 
 <code>OD.wav</code> https://mixkit.co/
+
+<code>pistol.mp3</code> https://sc.chinaz.com/yinxiao/?classid=&keyword=%E5%83%B5%E5%B0%B8
 
 <code>player_hurt.wav</code> https://mixkit.co/
 
@@ -117,16 +133,8 @@ In this project, several additional files are used and the sources are listed be
 
 <code>starting.flac</code> This War of Mine Original Soundtrack - Piotr Musiaê - This War of Mine
 
+<code>Submachine.mp3.wav</code> https://mixkit.co/
+
 <code>zombie_hurt.wav</code> https://mixkit.co/
 
-
-
-
-<code></code>
-
-<code></code>
-
-<code></code>
-
-<code></code>
 ***
