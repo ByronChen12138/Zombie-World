@@ -4,12 +4,18 @@ from utils.utils import *
 
 
 class Bullet(DrawingObject):
-    def __init__(self, x, y, direction, color, damage, speed, acceleration):
+    def __init__(self, app, x, y, direction, color, damage, speed, acceleration, g_type):
         super().__init__(x, y, 1, "Circle", direction, color)
         self.damage = damage
         self.speed = speed
         self.acceleration = acceleration
         self.dece_time = 10
+        if g_type == "Pistol":
+            app.SOUND_PISTOL.start()
+        elif g_type == "Sniper":
+            app.SOUND_SNIPER.start()
+        else:
+            app.SOUND_SUBMACHINE.start()
 
     def __str__(self):
         return f"({self.x}, {self.y})"

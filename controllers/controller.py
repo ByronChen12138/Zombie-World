@@ -18,6 +18,7 @@ def mousePressed(app, event):
                 app.SOUND_BUTTON_ENTER.start()
                 app.page_set = False
                 app.UI = "Game"
+                app.MUSIC_STARTING.stop()
 
             elif b.text == "Help":
                 app.SOUND_BUTTON_ENTER.start()
@@ -33,7 +34,20 @@ def mousePressed(app, event):
                 app.SOUND_BUTTON_QUIT.start()
                 app.page_set = False
                 app.UI = "Menu"
+                app.MUSIC_STARTING.start(-1)
                 appStarted(app)
+
+
+# def keyReleased(app, event):
+#     """
+#     Activate when any key is released when running the app
+#     :param app: Current app object
+#     :param event: Current event object
+#     :return: None
+#     """
+#     if app.UI == "Game" and event.key == "Space":
+#         if app.player.curr_gun == "Submachine":
+#             app.MUSIC_SUB.stop()
 
 
 def keyPressed(app, event):
@@ -78,7 +92,7 @@ def keyPressed(app, event):
 
         # Shoot of the player
         if event.key == "Space" and app.player.shoot_time <= 0:
-            app.player.shoot()
+            app.player.shoot(app)
 
         # Swap gun of the player
         if event.key == "1":
@@ -174,6 +188,7 @@ def timerFired(app):
             app.buttons = set()
             app.buttons.add(MyButton(app, 50, 50, 4, "#969285", "Quit"))
             app.page_set = True
+            app.MUSIC_ENDING.start()
             return
 
         # Bullet hit zombie

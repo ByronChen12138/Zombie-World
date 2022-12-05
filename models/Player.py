@@ -35,10 +35,11 @@ class Player(Character):
         self.curr_ammo = self.guns[self.curr_gun]
         self.shoot_time = 0
 
-    def shoot(self):
+    def shoot(self, app):
         size, ammo, heat_rate, color, damage, speed, acceleration, appear_rate = G_TYPE[self.curr_gun]
         if self.guns[self.curr_gun] > 0:
-            self.bullets.append(Bullet(self.x, self.y, self.direction, color, damage, speed, acceleration))
+            self.bullets.append(Bullet(app, self.x, self.y, self.direction, color, damage,
+                                       speed, acceleration, self.curr_gun))
             self.shoot_time = heat_rate
             self.guns[self.curr_gun] -= 1
             self.curr_ammo = self.guns[self.curr_gun]

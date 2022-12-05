@@ -103,6 +103,8 @@ In this project, several additional files are used and the sources are listed be
 
 <code>button_quit.mp3</code> https://www.zapsplat.com/sound-effect-category/button-clicks/
 
+<code>Ending.mp3</code> https://sc.chinaz.com/yinxiao/?classid=&keyword=%E5%83%B5%E5%B0%B8
+
 <code>OD.wav</code> https://mixkit.co/
 
 <code>player_hurt.wav</code> https://mixkit.co/
@@ -111,7 +113,20 @@ In this project, several additional files are used and the sources are listed be
 
 <code>player_hurt3.wav</code> https://mixkit.co/
 
+<code>Sniper.mp3</code> https://sc.chinaz.com/yinxiao/?classid=&keyword=%E5%83%B5%E5%B0%B8
+
+<code>starting.flac</code> This War of Mine Original Soundtrack - Piotr Musiaê - This War of Mine
+
 <code>zombie_hurt.wav</code> https://mixkit.co/
+
+
+
+
+<code></code>
+
+<code></code>
+
+<code></code>
 
 <code></code>
 ***

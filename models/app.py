@@ -1,6 +1,7 @@
 import pygame
 
 from models.Map import Map
+from models.Music import Music
 from models.Player import Player
 from models.Sound import Sound
 from models.Zombie import Zombie
@@ -55,7 +56,13 @@ def appStarted(app):
     app.SOUND_PLAYER_HURT3 = Sound("./sounds/player_hurt3.wav")
     app.SOUND_ZOMBIE_HURT = Sound("./sounds/zombie_hurt.wav")
     app.SOUND_OD = Sound("./sounds/OD.wav")
+    app.SOUND_SNIPER = Sound("./sounds/Sniper.mp3", 0.5)
+    app.SOUND_PISTOL = Sound("./sounds/pistol.mp3")
+    app.SOUND_SUBMACHINE = Sound("./sounds/Submachine.mp3")
+    app.SOUND_GUNPICK = Sound("./sounds/Gun Pick.wav")
 
+    # Create Music
+    app.MUSIC_STARTING = Music("./sounds/starting.flac")
+    app.MUSIC_ENDING = Music("./sounds/Ending.mp3")
 
-
-
+    app.MUSIC_STARTING.start(-1)

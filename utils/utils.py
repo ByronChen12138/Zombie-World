@@ -215,6 +215,7 @@ def pickGun(app):
             app.player.pickUpAGun(g)
             app.guns.remove(g)
             is_picked = True
+            app.SOUND_GUNPICK.start()
 
     return is_picked
 
