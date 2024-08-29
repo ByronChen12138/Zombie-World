@@ -1,6 +1,11 @@
 # Zombie-World
 
-Welcome to the game Zombie World!
+Welcome to the game Zombie World! 
+
+***
+
+## To Be Noticed:
+This is a sample final project for the Course CMU 15-112 from Fundamentals of Programming and Computer Science in Carnegie Mellon University.
 
 ***
 
